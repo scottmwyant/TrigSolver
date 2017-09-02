@@ -1,6 +1,6 @@
 ﻿namespace TrigSolver
 {
-    partial class Form1
+    partial class MyForm
     {
         /// <summary>
         /// Required designer variable.
@@ -365,16 +365,7 @@
         }
 
         #endregion
-        private System.Windows.Forms.Label labelAlpha;
-        private System.Windows.Forms.Label labelA;
-        private System.Windows.Forms.Label labelBeta;
-        private System.Windows.Forms.Label labelB;
-        private System.Windows.Forms.Label labelGamma;
-        private System.Windows.Forms.Label labelC;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Label labelStatus1;
-        private System.Windows.Forms.Label labelStatus2;
+
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
@@ -386,14 +377,31 @@
         private System.Windows.Forms.ToolStripMenuItem aasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem asaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sasToolStripMenuItem;
-        private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.ToolStripMenuItem sssToolStripMenuItem;
+
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox3;
+
+        private System.Windows.Forms.Label labelAlpha;
+        private System.Windows.Forms.Label labelA;
+        private System.Windows.Forms.Label labelBeta;
+        private System.Windows.Forms.Label labelB;
+        private System.Windows.Forms.Label labelGamma;
+        private System.Windows.Forms.Label labelC;
+
         private MyTextBox textBoxAlpha;
         private MyTextBox textBoxBeta;
         private MyTextBox textBoxGamma;
         private MyTextBox textBoxA;
         private MyTextBox textBoxB;
         private MyTextBox textBoxC;
+
+        private System.Windows.Forms.Label labelStatus1;
+        private System.Windows.Forms.Label labelStatus2;
+
+
+        
     }
 }
 
