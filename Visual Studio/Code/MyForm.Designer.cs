@@ -390,12 +390,12 @@
         private System.Windows.Forms.Label labelGamma;
         private System.Windows.Forms.Label labelC;
 
-        private MyTextBox textBoxAlpha;
-        private MyTextBox textBoxBeta;
-        private MyTextBox textBoxGamma;
-        private MyTextBox textBoxA;
-        private MyTextBox textBoxB;
-        private MyTextBox textBoxC;
+        private TrigSolver.MyTextBox textBoxAlpha;
+        private TrigSolver.MyTextBox textBoxBeta;
+        private TrigSolver.MyTextBox textBoxGamma;
+        private TrigSolver.MyTextBox textBoxA;
+        private TrigSolver.MyTextBox textBoxB;
+        private TrigSolver.MyTextBox textBoxC;
 
         private System.Windows.Forms.Label labelStatus1;
         private System.Windows.Forms.Label labelStatus2;
