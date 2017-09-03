@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Drawing;
+﻿// References
+using System;
+
 
 namespace TrigSolver
 {
@@ -15,8 +12,8 @@ namespace TrigSolver
     // Entry point
     static void Main()
     {
-        Form1 myForm = new Form1();
-        myForm.ShowDialog();
+        MyForm mainForm = new MyForm();
+        mainForm.ShowDialog();
     }
 
 }

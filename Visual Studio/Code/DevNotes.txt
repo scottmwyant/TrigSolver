@@ -1,0 +1,12 @@
+﻿Next Steps:
+
+		+	Validate each calculation case
+
+		+	Set the max number of characters for each textbox
+
+		+	Settings
+
+		+	Calculate area
+
+		+	Plot the triangle
+		
