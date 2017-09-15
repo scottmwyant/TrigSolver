@@ -13,6 +13,7 @@ namespace TrigSolver
         private const string statusWaiting = "Waiting for inputs...";
 
         // Fields
+
         private bool solved = new bool();
         private bool allInputsValid = new bool();
         private double toRadians = new double();
@@ -45,12 +46,14 @@ namespace TrigSolver
 
             StatusUpdate(2, statusWaiting);
 
+
             // This section will be temporary until the SETTINGS are plumbed in
             degToolStripMenuItem.Checked = true;
             units = "Degrees";
 
             aasToolStripMenuItem.Checked = true;
             inputs = "AAS";
+
             ManageTextBoxes(inputs);
 
             ManageEventHandlers(true);
@@ -64,9 +67,7 @@ namespace TrigSolver
 
         private void TextBox_TextChanged(object sender, EventArgs e)
         {
-                MyTextBox tbx = (MyTextBox)sender;
-            
-            //tbx.UpdateNumericValue();
+            MyTextBox tbx = (MyTextBox)sender;
 
             ValidateInput(tbx);
 
@@ -76,15 +77,11 @@ namespace TrigSolver
                 PresentSolution(MyTriangle);
                 StatusUpdate(2, "Area: " + Math.Round(MyTriangle.Area, 3).ToString() + " sq. units");
                 solved = true;
-                
             }
-            else
+            else if (solved)
             {
-                if (solved)
-                {
-                    ClearSolution();
-                    solved = false;
-                }
+                ClearSolution();
+                solved = false;
             }
         }
 
@@ -132,6 +129,7 @@ namespace TrigSolver
             foreach (MyTextBox tbx in textBoxes)
             {
                 if (tbx.Enabled)
+
                 {
                     tbx.Text = null;
                     tbx.Enabled = false;
@@ -212,6 +210,7 @@ namespace TrigSolver
             Double.TryParse(tbx.Text, out ans);
             return ans;
         }
+
 
         private Triangle DefineTriangle()
         {
