@@ -1,6 +1,11 @@
 ﻿Next Steps:
 
 		+	Validate each calculation case
-		+	Additional validation for two-angle inputs (must sum to a value less than PI radians)
-		+	Improve the validation logic to include something about the string length (not just when it switches)
+
+		+	Set the max number of characters for each textbox
+
 		+	Settings
+
+		+	Calculate area
+
+		+	Plot the triangle

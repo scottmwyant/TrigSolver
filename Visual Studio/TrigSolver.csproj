@@ -56,6 +56,7 @@
     </Compile>
     <Compile Include="Code\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Code\Triangle.cs" />
     <None Include="Properties\App.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -69,6 +70,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Code\DevNotes.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Code\MyForm.resx">
+      <DependentUpon>MyForm.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

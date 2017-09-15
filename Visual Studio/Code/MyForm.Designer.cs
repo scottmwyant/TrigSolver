@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBoxAlpha = new TrigSolver.MyTextBox();
-            this.textBoxBeta = new TrigSolver.MyTextBox();
-            this.textBoxGamma = new TrigSolver.MyTextBox();
-            this.textBoxA = new TrigSolver.MyTextBox();
-            this.textBoxB = new TrigSolver.MyTextBox();
-            this.textBoxC = new TrigSolver.MyTextBox();
+            this.textBox0 = new TrigSolver.MyTextBox();
+            this.textBox1 = new TrigSolver.MyTextBox();
+            this.textBox2 = new TrigSolver.MyTextBox();
+            this.textBox3 = new TrigSolver.MyTextBox();
+            this.textBox4 = new TrigSolver.MyTextBox();
+            this.textBox5 = new TrigSolver.MyTextBox();
             this.labelAlpha = new System.Windows.Forms.Label();
             this.labelA = new System.Windows.Forms.Label();
             this.labelBeta = new System.Windows.Forms.Label();
@@ -42,8 +42,6 @@
             this.labelC = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.labelStatus1 = new System.Windows.Forms.Label();
-            this.labelStatus2 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,80 +51,93 @@
             this.asaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sssToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sSSToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.unitsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.degToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.radToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel0 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // textBoxAlpha
+            // textBox0
             // 
-            this.textBoxAlpha.Location = new System.Drawing.Point(19, 35);
-            this.textBoxAlpha.Name = "textBoxAlpha";
-            this.textBoxAlpha.Size = new System.Drawing.Size(75, 20);
-            this.textBoxAlpha.TabIndex = 0;
-            this.textBoxAlpha.Tag = "0";
-            //this.textBoxAlpha.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
-            this.textBoxAlpha.FeatureType = "Angle";
-            this.textBoxAlpha.Input = false;
+            this.textBox0.FeatureType = "Angle";
+            this.textBox0.Input = false;
+            this.textBox0.Location = new System.Drawing.Point(19, 35);
+            this.textBox0.Name = "textBox0";
+            this.textBox0.Size = new System.Drawing.Size(75, 20);
+            this.textBox0.TabIndex = 0;
+            this.textBox0.Tag = "0";
+            this.textBox0.Valid = false;
+            this.textBox0.Value = 0D;
             // 
-            // textBoxBeta
+            // textBox1
             // 
-            this.textBoxBeta.Location = new System.Drawing.Point(100, 35);
-            this.textBoxBeta.Name = "textBoxBeta";
-            this.textBoxBeta.Size = new System.Drawing.Size(75, 20);
-            this.textBoxBeta.TabIndex = 1;
-            this.textBoxBeta.Tag = "1";
-            //this.textBoxBeta.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
-            this.textBoxBeta.FeatureType = "Angle";
-            this.textBoxBeta.Input = false;
+            this.textBox1.FeatureType = "Angle";
+            this.textBox1.Input = false;
+            this.textBox1.Location = new System.Drawing.Point(100, 35);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(75, 20);
+            this.textBox1.TabIndex = 1;
+            this.textBox1.Tag = "1";
+            this.textBox1.Valid = false;
+            this.textBox1.Value = 0D;
             // 
-            // textBoxGamma
+            // textBox2
             // 
-            this.textBoxGamma.Location = new System.Drawing.Point(181, 35);
-            this.textBoxGamma.Name = "textBoxGamma";
-            this.textBoxGamma.Size = new System.Drawing.Size(75, 20);
-            this.textBoxGamma.TabIndex = 2;
-            this.textBoxGamma.Tag = "2";
-            //this.textBoxGamma.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
-            this.textBoxGamma.FeatureType = "Angle";
-            this.textBoxGamma.Input = false;
+            this.textBox2.FeatureType = "Angle";
+            this.textBox2.Input = false;
+            this.textBox2.Location = new System.Drawing.Point(181, 35);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(75, 20);
+            this.textBox2.TabIndex = 2;
+            this.textBox2.Tag = "2";
+            this.textBox2.Valid = false;
+            this.textBox2.Value = 0D;
             // 
-            // textBoxA
+            // textBox3
             // 
-            this.textBoxA.Location = new System.Drawing.Point(19, 35);
-            this.textBoxA.Name = "textBoxA";
-            this.textBoxA.Size = new System.Drawing.Size(75, 20);
-            this.textBoxA.TabIndex = 3;
-            this.textBoxA.Tag = "3";
-            //this.textBoxA.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
-            this.textBoxA.FeatureType = "Side";
-            this.textBoxA.Input = false;
+            this.textBox3.FeatureType = "Side";
+            this.textBox3.Input = false;
+            this.textBox3.Location = new System.Drawing.Point(19, 35);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(75, 20);
+            this.textBox3.TabIndex = 3;
+            this.textBox3.Tag = "3";
+            this.textBox3.Valid = false;
+            this.textBox3.Value = 0D;
             // 
-            // textBoxB
+            // textBox4
             // 
-            this.textBoxB.Location = new System.Drawing.Point(103, 35);
-            this.textBoxB.Name = "textBoxB";
-            this.textBoxB.Size = new System.Drawing.Size(75, 20);
-            this.textBoxB.TabIndex = 4;
-            this.textBoxB.Tag = "4";
-            //this.textBoxB.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
-            this.textBoxB.FeatureType = "Side";
-            this.textBoxB.Input = false;
+            this.textBox4.FeatureType = "Side";
+            this.textBox4.Input = false;
+            this.textBox4.Location = new System.Drawing.Point(103, 35);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(75, 20);
+            this.textBox4.TabIndex = 4;
+            this.textBox4.Tag = "4";
+            this.textBox4.Valid = false;
+            this.textBox4.Value = 0D;
             // 
-            // textBoxC
+            // textBox5
             // 
-            this.textBoxC.Location = new System.Drawing.Point(184, 35);
-            this.textBoxC.Name = "textBoxC";
-            this.textBoxC.Size = new System.Drawing.Size(75, 20);
-            this.textBoxC.TabIndex = 5;
-            this.textBoxC.Tag = "5";
-            //this.textBoxC.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
-            this.textBoxC.FeatureType = "Side";
-            this.textBoxC.Input = false;
+            this.textBox5.FeatureType = "Side";
+            this.textBox5.Input = false;
+            this.textBox5.Location = new System.Drawing.Point(184, 35);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(75, 20);
+            this.textBox5.TabIndex = 5;
+            this.textBox5.Tag = "5";
+            this.textBox5.Valid = false;
+            this.textBox5.Value = 0D;
             // 
             // labelAlpha
             // 
@@ -187,9 +198,9 @@
             this.groupBox1.Controls.Add(this.labelGamma);
             this.groupBox1.Controls.Add(this.labelBeta);
             this.groupBox1.Controls.Add(this.labelAlpha);
-            this.groupBox1.Controls.Add(this.textBoxGamma);
-            this.groupBox1.Controls.Add(this.textBoxBeta);
-            this.groupBox1.Controls.Add(this.textBoxAlpha);
+            this.groupBox1.Controls.Add(this.textBox2);
+            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.textBox0);
             this.groupBox1.Location = new System.Drawing.Point(25, 28);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(275, 70);
@@ -199,10 +210,10 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.textBoxA);
-            this.groupBox2.Controls.Add(this.textBoxB);
+            this.groupBox2.Controls.Add(this.textBox3);
+            this.groupBox2.Controls.Add(this.textBox4);
             this.groupBox2.Controls.Add(this.labelC);
-            this.groupBox2.Controls.Add(this.textBoxC);
+            this.groupBox2.Controls.Add(this.textBox5);
             this.groupBox2.Controls.Add(this.labelB);
             this.groupBox2.Controls.Add(this.labelA);
             this.groupBox2.Location = new System.Drawing.Point(25, 103);
@@ -211,26 +222,6 @@
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Sides";
-            // 
-            // labelStatus1
-            // 
-            this.labelStatus1.BackColor = System.Drawing.SystemColors.Control;
-            this.labelStatus1.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.labelStatus1.Location = new System.Drawing.Point(2, 392);
-            this.labelStatus1.Name = "labelStatus1";
-            this.labelStatus1.Size = new System.Drawing.Size(40, 14);
-            this.labelStatus1.TabIndex = 11;
-            this.labelStatus1.Text = "Status: ";
-            // 
-            // labelStatus2
-            // 
-            this.labelStatus2.BackColor = System.Drawing.SystemColors.Control;
-            this.labelStatus2.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.labelStatus2.Location = new System.Drawing.Point(39, 392);
-            this.labelStatus2.Name = "labelStatus2";
-            this.labelStatus2.Size = new System.Drawing.Size(261, 14);
-            this.labelStatus2.TabIndex = 12;
-            this.labelStatus2.Text = "Waiting";
             // 
             // menuStrip1
             // 
@@ -272,39 +263,47 @@
             this.aasToolStripMenuItem,
             this.asaToolStripMenuItem,
             this.sasToolStripMenuItem,
-            this.sssToolStripMenuItem});
+            this.sssToolStripMenuItem,
+            this.sSSToolStripMenuItem1});
             this.inputsToolStripMenuItem.Name = "inputsToolStripMenuItem";
-            this.inputsToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.inputsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.inputsToolStripMenuItem.Text = "Inputs";
             this.inputsToolStripMenuItem.Click += new System.EventHandler(this.OptionsToolStripMenuItem_Click);
             // 
             // aasToolStripMenuItem
             // 
             this.aasToolStripMenuItem.Name = "aasToolStripMenuItem";
-            this.aasToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
-            this.aasToolStripMenuItem.Text = "AAS (Angle-Angle-Side)";
+            this.aasToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aasToolStripMenuItem.Text = "AAS";
             this.aasToolStripMenuItem.Click += new System.EventHandler(this.OptionsToolStripMenuItem_Click);
             // 
             // asaToolStripMenuItem
             // 
             this.asaToolStripMenuItem.Name = "asaToolStripMenuItem";
-            this.asaToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
-            this.asaToolStripMenuItem.Text = "ASA (Angle-Side-Angle)";
+            this.asaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.asaToolStripMenuItem.Text = "ASA";
             this.asaToolStripMenuItem.Click += new System.EventHandler(this.OptionsToolStripMenuItem_Click);
             // 
             // sasToolStripMenuItem
             // 
             this.sasToolStripMenuItem.Name = "sasToolStripMenuItem";
-            this.sasToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
-            this.sasToolStripMenuItem.Text = "SAS (Side-Angle-Side)";
+            this.sasToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.sasToolStripMenuItem.Text = "SAS";
             this.sasToolStripMenuItem.Click += new System.EventHandler(this.OptionsToolStripMenuItem_Click);
             // 
             // sssToolStripMenuItem
             // 
             this.sssToolStripMenuItem.Name = "sssToolStripMenuItem";
-            this.sssToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
-            this.sssToolStripMenuItem.Text = "SSS (Side-Side-Side)";
+            this.sssToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.sssToolStripMenuItem.Text = "SSA";
             this.sssToolStripMenuItem.Click += new System.EventHandler(this.OptionsToolStripMenuItem_Click);
+            // 
+            // sSSToolStripMenuItem1
+            // 
+            this.sSSToolStripMenuItem1.Name = "sSSToolStripMenuItem1";
+            this.sSSToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.sSSToolStripMenuItem1.Text = "SSS";
+            this.sSSToolStripMenuItem1.Click += new System.EventHandler(this.OptionsToolStripMenuItem_Click);
             // 
             // unitsToolStripMenuItem
             // 
@@ -312,46 +311,95 @@
             this.degToolStripMenuItem,
             this.radToolStripMenuItem});
             this.unitsToolStripMenuItem.Name = "unitsToolStripMenuItem";
-            this.unitsToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.unitsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.unitsToolStripMenuItem.Text = "Units";
             // 
             // degToolStripMenuItem
             // 
             this.degToolStripMenuItem.Name = "degToolStripMenuItem";
-            this.degToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.degToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.degToolStripMenuItem.Text = "Degrees";
             this.degToolStripMenuItem.Click += new System.EventHandler(this.OptionsToolStripMenuItem_Click);
             // 
             // radToolStripMenuItem
             // 
             this.radToolStripMenuItem.Name = "radToolStripMenuItem";
-            this.radToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.radToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.radToolStripMenuItem.Text = "Radians";
             this.radToolStripMenuItem.Click += new System.EventHandler(this.OptionsToolStripMenuItem_Click);
             // 
-            // groupBox3
+            // pictureBox1
             // 
-            this.groupBox3.Location = new System.Drawing.Point(25, 179);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(275, 206);
-            this.groupBox3.TabIndex = 14;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Sketch";
+            this.pictureBox1.Location = new System.Drawing.Point(25, 179);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(275, 190);
+            this.pictureBox1.TabIndex = 16;
+            this.pictureBox1.TabStop = false;
             // 
-            // Form1
+            // statusStrip1
+            // 
+            this.statusStrip1.AutoSize = false;
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel0,
+            this.toolStripStatusLabel1,
+            this.toolStripStatusLabel2});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 388);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(325, 24);
+            this.statusStrip1.SizingGrip = false;
+            this.statusStrip1.TabIndex = 17;
+            this.statusStrip1.Text = "statusStrip2";
+            // 
+            // toolStripStatusLabel0
+            // 
+            this.toolStripStatusLabel0.AutoSize = false;
+            this.toolStripStatusLabel0.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+            this.toolStripStatusLabel0.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenInner;
+            this.toolStripStatusLabel0.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.toolStripStatusLabel0.Name = "toolStripStatusLabel0";
+            this.toolStripStatusLabel0.Size = new System.Drawing.Size(40, 19);
+            this.toolStripStatusLabel0.Text = "DEG";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.AutoSize = false;
+            this.toolStripStatusLabel1.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+            this.toolStripStatusLabel1.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenInner;
+            this.toolStripStatusLabel1.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(40, 19);
+            this.toolStripStatusLabel1.Text = "AAS";
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.AutoSize = false;
+            this.toolStripStatusLabel2.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+            this.toolStripStatusLabel2.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenInner;
+            this.toolStripStatusLabel2.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(220, 19);
+            this.toolStripStatusLabel2.Text = "Status:";
+            this.toolStripStatusLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // MyForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(325, 412);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.labelStatus2);
-            this.Controls.Add(this.labelStatus1);
+            this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Form1";
+            this.Name = "MyForm";
             this.Text = "Trig Solver";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -359,6 +407,9 @@
             this.groupBox2.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -381,7 +432,6 @@
 
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.GroupBox groupBox3;
 
         private System.Windows.Forms.Label labelAlpha;
         private System.Windows.Forms.Label labelA;
@@ -390,18 +440,19 @@
         private System.Windows.Forms.Label labelGamma;
         private System.Windows.Forms.Label labelC;
 
-        private TrigSolver.MyTextBox textBoxAlpha;
-        private TrigSolver.MyTextBox textBoxBeta;
-        private TrigSolver.MyTextBox textBoxGamma;
-        private TrigSolver.MyTextBox textBoxA;
-        private TrigSolver.MyTextBox textBoxB;
-        private TrigSolver.MyTextBox textBoxC;
+        private TrigSolver.MyTextBox textBox0;
+        private TrigSolver.MyTextBox textBox1;
+        private TrigSolver.MyTextBox textBox2;
+        private TrigSolver.MyTextBox textBox3;
+        private TrigSolver.MyTextBox textBox4;
+        private TrigSolver.MyTextBox textBox5;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripMenuItem sSSToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel0;
 
-        private System.Windows.Forms.Label labelStatus1;
-        private System.Windows.Forms.Label labelStatus2;
-
-
-        
     }
 }
 
