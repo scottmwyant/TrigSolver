@@ -9,4 +9,3 @@
 		+	Calculate area
 
 		+	Plot the triangle
-		
