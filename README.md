@@ -39,3 +39,11 @@ This class is a sort of wrapper for the specifications.  When a Data object is v
 - [CodeProject.com: Specification Pattern in C#](https://www.codeproject.com/Articles/670115/Specification-pattern-in-Csharp)
 - [Coding Blocks: Episode 63](https://www.codingblocks.net/podcast/explicit-constraints-processes-specification-pattern-and-more/)
 - [Martin Fowler: Specifications](https://www.martinfowler.com/apsupp/spec.pdf)
+- [System.Collections.BitArray](https://docs.microsoft.com/en-us/dotnet/api/system.collections.bitarray.-ctor?view=netframework-4.7.2)
+- [btye - C# Reference](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/byte)
+
+## Working Notes
+ What would a profiler look like?
+
+ - Can we profile the inputs to generate a single character.  Since there are only six inputs, the last two bits would always be zero.
+ - Then we'd have a dictionary or hash table that is created with literals.  The dictionary would use the ASCII character profile to look up information about the solution.

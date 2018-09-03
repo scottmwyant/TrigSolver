@@ -4,12 +4,6 @@ using System.Text;
 
 namespace TrigSolver
 {
-    //interface ISpecification
-    //{
-    //    bool IsSatisfiedBy(DataSet ds);
-    //    string ErrorMessage { get;}
-    //}
-
     abstract class Specification
     {
 
@@ -47,29 +41,41 @@ namespace TrigSolver
     {
         public override bool IsSatisfiedBy(DataSet ds)
         {
-            if (itsNecessary(ds))
+            if (threeLengthsGiven(ds))
             {
                 if (ds.Lengths.Max < (ds.Lengths.Sum - ds.Lengths.Max)) {return true; }
                 else
                 {
-                    double gap; // calculate the gap here to feed a metric into the error message
-                    errorText = "The three side lengths given cannot form a triangle.  Either make the biggest length smaller by X or one of the other ones longer by X.";
+                    errorText = setErrorText(ds);
                     return false;
                 }
                 
             }
-            else { return true; }
-
-
+            else
+            {
+                return true;
+            }
         }
-        private bool itsNecessary(DataSet ds)
+        private bool threeLengthsGiven(DataSet ds)
         {
             return ((Helper.CountNonZeros(ds.ArrayAll) == 3) && (Helper.CountNonZeros(ds.ArrayLen) == 3));
         }
-
-        private bool TestLengths(DataSet ds)
+        private string setErrorText(DataSet ds)
         {
-            return (ds.Lengths.Max < (ds.Lengths.Sum - ds.Lengths.Max));
+            double gap; // calculate the gap here to feed a metric into the error message
+            return "The three side lengths given cannot form a triangle.  Either make the biggest length smaller by X or one of the other ones longer by X.";
+        }
+    }
+    class Spec_SumOfAngles : Specification
+    {
+        public override bool IsSatisfiedBy(DataSet ds)
+        {
+            if(ds.Angles.Sum < Math.Pi){return true;}
+            else
+            {
+                errorText = "The sum of the given angles cannot be more than 180 degrees.";
+                return false;
+            }
         }
     }
 
@@ -81,7 +87,7 @@ namespace TrigSolver
         public static int CountNonZeros(double[] arr)
         {
             int count = new int();
-            foreach (double d in arr) { if (d > 0) { count++; } }
+            foreach (double d in arr) { if (d != 0) { count++; } }
             return count;
         }
     }
