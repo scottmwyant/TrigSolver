@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace TrigSolver
 {
-    class Triple
+    public class Triple
     {
         public double Max { get { return Arr.Max(); } }
         public double Mid { get { return Arr.Sum() - Arr.Min() - Arr.Max(); } }

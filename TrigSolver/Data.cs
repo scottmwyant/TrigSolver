@@ -2,13 +2,23 @@
 
 namespace TrigSolver
 {
-    class Data
+    public class Data
     {
-        public double lenA = new double();
-        public double lenB = new double();
-        public double lenC = new double();
-        public double angA = new double();
-        public double angB = new double();
-        public double angC = new double();
+        public double angA { get; set; }
+        public double angB { get; set; }
+        public double angC { get; set; }
+        public double lenA { get; set; }
+        public double lenB { get; set; }
+        public double lenC { get; set; }
+        
+        public Data Copy()
+        {
+            Data ans = new Data
+            {
+                angA =this.angA, angB=this.angB, angC=this.angC,
+                lenA =this.lenA, lenB=this.lenB, lenC=this.lenC
+            };
+            return ans;
+        }
     }
 }

@@ -17,7 +17,7 @@ namespace TrigSolver
     {   
         public override bool IsSatisfiedBy(DataSet ds)
         {
-            int count = Helper.CountNonZeros(ds.ArrayAll);
+            int count = ds.CountAll;
             if (count < 3) { errorText = "Underdefined: There need to be exactly 3 values given."; }
             else if (count > 3) { errorText = "Overdefined: There need to be exactly 3 values given."; }
             return (count==3);
@@ -27,7 +27,7 @@ namespace TrigSolver
     {
         public override bool IsSatisfiedBy(DataSet ds)
         {
-            if(Helper.CountNonZeros(ds.ArrayLen) > 0){return true;}
+            if(ds.CountLen> 0){return true;}
             else
             {
                 errorText = "At least one of the given values must be a length.";
@@ -58,7 +58,7 @@ namespace TrigSolver
         }
         private bool threeLengthsGiven(DataSet ds)
         {
-            return ((Helper.CountNonZeros(ds.ArrayAll) == 3) && (Helper.CountNonZeros(ds.ArrayLen) == 3));
+            return ((ds.CountAll == 3) && (ds.CountLen == 3));
         }
         private string setErrorText(DataSet ds)
         {
@@ -70,7 +70,7 @@ namespace TrigSolver
     {
         public override bool IsSatisfiedBy(DataSet ds)
         {
-            if(ds.Angles.Sum < Math.Pi){return true;}
+            if(ds.Angles.Sum < Math.PI){return true;}
             else
             {
                 errorText = "The sum of the given angles cannot be more than 180 degrees.";
@@ -78,18 +78,4 @@ namespace TrigSolver
             }
         }
     }
-
-
-
-
-    static class Helper
-    {
-        public static int CountNonZeros(double[] arr)
-        {
-            int count = new int();
-            foreach (double d in arr) { if (d != 0) { count++; } }
-            return count;
-        }
-    }
-
 }

@@ -19,5 +19,29 @@ namespace TrigSolver
         public static double LawOfSines_SolveForLength2(double angle1, double length1, double angle2)
         { return (length1 / Math.Sin(angle1)) * Math.Sin(angle2); }
 
+
+
+        public static Data SolveByProfile(Data data, string profile)
+        {
+            Data ans = data.Copy();
+
+            switch (profile)
+            {
+                case "001011":
+                    // step 1 ans.LenB = (for example)
+                    // step 2 ans.AngC = (...)
+                    // step 3 ans.LenA = (...)
+                    break;
+
+                case "so on and so on...":
+
+                    break;
+            }
+
+
+            return ans;
+        }
     }
+
+}
 }

@@ -43,7 +43,21 @@ This class is a sort of wrapper for the specifications.  When a Data object is v
 - [btye - C# Reference](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/byte)
 
 ## Working Notes
- What would a profiler look like?
 
- - Can we profile the inputs to generate a single character.  Since there are only six inputs, the last two bits would always be zero.
- - Then we'd have a dictionary or hash table that is created with literals.  The dictionary would use the ASCII character profile to look up information about the solution.
+- The DataSet is the profiler.  This class encapsulates all the logic for determining the 123456 profile and the algorithm ("ASA", etc).
+
+- Validation will return boolean.  Then there will be a response object on the validation class that can be explorted if the validation fails.
+
+- The actual solving will be done with a static method in the Trig class.
+
+- The general flow is as follows:
+
+  - Generate data (view or view model is responsible for this)
+  
+  - Pass the data into the controller.
+    
+    - Inside the controller, the data is used to construct a DataSet object then that is passed into Validation.
+    - If Validation fails, some error message is sent back to the view model
+    - If validation passes, the controller calls on teh Solve method in the Trig class
+    - The solved method is passed back to the view model.
+    - So either the view model needs to know about the controller, meaning the view has to know how to explore the response, but it would probably be better to have the controller pass a response object back to the view model.  This class would have to have contain a Data, a ErrorText and some indicator which one to use.  Perhaps the "ErrorText" would just be "Text" then the text woudl be either positive or negative.   Also, there could be a responseId, something that numerically indicates the status of the response, if things went well or if things went south.
