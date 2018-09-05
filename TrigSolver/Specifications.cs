@@ -62,7 +62,7 @@ namespace TrigSolver
         }
         private string setErrorText(DataSet ds)
         {
-            double gap; // calculate the gap here to feed a metric into the error message
+            double gap = new double(); // calculate the gap here to feed a metric into the error message
             return "The three side lengths given cannot form a triangle.  Either make the biggest length smaller by X or one of the other ones longer by X.";
         }
     }
@@ -77,5 +77,25 @@ namespace TrigSolver
                 return false;
             }
         }
+    }
+    class Spec_SideLengthForSSA : Specification
+    {
+        public override bool IsSatisfiedBy(DataSet ds)
+        {
+            double minGivenLength = ds.Lengths.Min;
+            double minTheoretical = Trig.LawOfSines_SolveForLength2(ds.Lengths.Max, (Math.PI / 2), ds.Angles.Sum);
+            if(minGivenLength<minTheoretical)
+            {
+                errorText = "Either make the shorter side at least X, or reduce the angle to X, or reduce the longer side to X";
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
+        }
+
+
     }
 }

@@ -27,14 +27,55 @@ namespace TrigSolver
 
             switch (profile)
             {
-                case "001011":
-                    // step 1 ans.LenB = (for example)
-                    // step 2 ans.AngC = (...)
-                    // step 3 ans.LenA = (...)
+                // Side-Side-Side
+                case "111000": // SSS 1 of 1
+                    break;
+                
+                 // Side-Angle-Side
+                case "001110": // SAS 1 of 3
+                    break;
+                case "010101": // SAS 2 of 3
+                    break;
+                case "100011": // SAS 3 of 3
                     break;
 
-                case "so on and so on...":
+                // Angle-Side-Angle
+                case "110001":  // ASA 1 of 3
+                    break;
+                case "011100":  // ASA 2 of 3
+                    break;
+                case "101010":  // ASA 3 of 3
+                    break;
 
+                // Angle-Angle-Side
+                case "110100":  // AAS 1 of 6
+                    break;
+                case "101100": // AAS 2 of 6
+                    break;
+                case "110010":  // AAS 3 of 6
+                    break;
+                case "011010": // AAS 4 of 6
+                    break;
+                case "101001": // AAS 5 of 6
+                    break;
+                case "011001": // AAS 6 of 6
+                    break;
+
+                // Side-Side-Angle
+                case "100110": // SSA 1 of 6
+                    break;
+                case "100101": // SSA 2 of 6
+                    break;
+                case "010110": // SSA 3 of 6
+                    break;
+                case "010011": // SSA 4 of 6
+                    break;
+                case "001101": // SSA 5 of 6
+                    break;
+                case "001011": // SSA 6 of 6
+                    break;
+
+                case "000111": // AAA 1 of 1
                     break;
             }
 

@@ -70,8 +70,33 @@ namespace TrigSolver
             string ans="";
             switch (profile)
             {
-                case "123456": ans="ASA"; break;
-                // so on and so on ...
+                case "111000": ans = "SSS"; break; // SSS 1 of 1
+                //
+                case "001110": ans = "SAS"; break; // SAS 1 of 3
+                case "010101": ans = "SAS"; break; // SAS 2 of 3
+                case "100011": ans = "SAS"; break; // SAS 3 of 3
+                //
+                case "110001": ans = "ASA"; break; // ASA 1 of 3
+                case "011100": ans = "ASA"; break; // ASA 2 of 3
+                case "101010": ans = "ASA"; break; // ASA 3 of 3
+                //
+                case "110100": ans = "AAS"; break; // AAS 1 of 6
+                case "101100": ans = "AAS"; break; // AAS 2 of 6
+                case "110010": ans = "AAS"; break; // AAS 3 of 6
+                case "011010": ans = "AAS"; break; // AAS 4 of 6
+                case "101001": ans = "AAS"; break; // AAS 5 of 6
+                case "011001": ans = "AAS"; break; // AAS 6 of 6
+                //
+                case "100110": ans = "SSA"; break; // SSA 1 of 6
+                case "100101": ans = "SSA"; break; // SSA 2 of 6
+                case "010110": ans = "SSA"; break; // SSA 3 of 6
+                case "010011": ans = "SSA"; break; // SSA 4 of 6
+                case "001101": ans = "SSA"; break; // SSA 5 of 6
+                case "001011": ans = "SSA"; break; // SSA 6 of 6
+                //
+                case "000111": ans = "AAA"; break; // AAA 1 of 1
+
+
             }
             return ans;
         }
