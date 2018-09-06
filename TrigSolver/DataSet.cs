@@ -33,8 +33,11 @@ namespace TrigSolver
             }
         }
 
-        public string Profile { get; private set; }
+        public string ProfileId { get; private set; }
         public string Algorithm { get; private set; }
+
+        private double[] inputSet;
+        private double[] outputSet;
 
         public DataSet(Data data) // Constructor
         {
@@ -44,9 +47,7 @@ namespace TrigSolver
             CountAng = CountNonZeros(Angles.Arr);
             CountLen= CountNonZeros(Lengths.Arr);
 
-            // The data set should be able to fully profile the data
-            Profile = SetProfile(ArrayAll);
-            Algorithm = SetAlgorithm(Profile);
+            Profile();
         }
         
         private static int CountNonZeros(double[] arr)
@@ -56,7 +57,130 @@ namespace TrigSolver
             return ans;
 
         }
-        private static string SetProfile(double[] arr)
+
+
+        private void Profile()
+        {
+            ProfileId = SetProfileId(ArrayAll);
+            switch (ProfileId)
+            {
+                // Side-Side-Side
+                case "000111":
+                    Algorithm = "SSS";
+                    inputSet = new double[] { 3, 4, 5 };
+                    outputSet = new double[] { 0, 1, 2 };
+                    break; 
+                
+                //Side-Angle-Side
+                case "001110":
+                    Algorithm = "SAS";
+                    inputSet = new double[] { 3, 2, 4 };
+                    outputSet = new double[] { 5, 0, 1 };
+                    break;
+                case "010101":
+                    Algorithm = "SAS";
+                    inputSet = new double[] { 3, 1, 2 };
+                    outputSet = new double[] { 4, 0, 2 };
+                    break;
+                case "100011":
+                    Algorithm = "SAS";
+                    inputSet = new double[] { 4, 0, 5 };
+                    outputSet = new double[] { 3, 1, 2 };
+                    break;
+                
+                // Angle-Side-Angle
+                case "110001":
+                    Algorithm = "ASA";
+                    inputSet = new double[] { 0, 5, 1 };
+                    outputSet = new double[] { 2, 3, 4 };
+                    break;
+                case "011100":
+                    Algorithm = "ASA";
+                    inputSet = new double[] { 1, 3, 2 };
+                    outputSet = new double[] { 0, 4, 5 };
+                    break;
+                case "101010":
+                    Algorithm = "ASA";
+                    inputSet = new double[] { 2, 4, 0 };
+                    outputSet = new double[] { 1, 3, 5 };
+                    break;
+                
+                // Angle-Angle-Side
+                case "110100":
+                    Algorithm = "AAS";
+                    inputSet = new double[] { 1, 0, 3 };
+                    outputSet = new double[] { 2, 4, 5 };
+                    break; 
+                case "101100":
+                    Algorithm = "AAS";
+                    inputSet = new double[] { 2, 0, 3 };
+                    outputSet = new double[] { 1, 5, 4 };
+                    break; 
+                case "110010":
+                    Algorithm = "AAS";
+                    inputSet = new double[] { 0, 1, 4 };
+                    outputSet = new double[] { 2, 3, 5 };
+                    break; 
+                case "011010":
+                    Algorithm = "AAS";
+                    inputSet = new double[] { 2, 1, 4 };
+                    outputSet = new double[] { 0, 4, 5 };
+                    break;
+                case "101001":
+                    Algorithm = "AAS";
+                    inputSet = new double[] { 0, 2, 5 };
+                    outputSet = new double[] { 1, 3, 4 };
+                    break;
+                case "011001":
+                    Algorithm = "AAS";
+                    inputSet = new double[] { 1, 2, 5 };
+                    outputSet = new double[] { 0, 4, 5 };
+                    break;
+                
+                // Side-Side-Angle
+                case "100110":
+                    Algorithm = "SSA";
+                    inputSet = new double[] { 4, 3, 0 };
+                    outputSet = new double[] { 1, 2, 5 };
+                    break;
+                case "100101":
+                    Algorithm = "SSA";
+                    inputSet = new double[] { 5, 3, 0 };
+                    outputSet = new double[] { 2, 1, 4 };
+                    break;
+                case "010110":
+                    Algorithm = "SSA";
+                    inputSet = new double[] { 3, 4, 1 };
+                    outputSet = new double[] { 0, 2, 5 };
+                    break;
+                case "010011":
+                    Algorithm = "SSA";
+                    inputSet = new double[] { 5, 4, 1 };
+                    outputSet = new double[] { 2, 0, 3 };
+                    break;
+                case "001101":
+                    Algorithm = "SSA";
+                    inputSet = new double[] { 3, 5, 2 };
+                    outputSet = new double[] { 0, 1, 4 };
+                    break;
+                case "001011":
+                    Algorithm = "SSA";
+                    inputSet = new double[] { 4, 5, 2 };
+                    outputSet = new double[] { 1, 0, 3 };
+                    break;
+                
+                // Angle-Angle-Angle
+                case "111000":
+                    Algorithm = "AAA";
+                    inputSet = new double[] { 0, 1, 2 };
+                    outputSet = new double[] { 3, 4, 5 };
+                    break; // AAA 1 of 1
+
+            }
+            
+        }
+
+        private static string SetProfileId(double[] arr)
         {
             string ans = "";
             for (int i = 0; i < arr.Length; i++)
@@ -65,42 +189,21 @@ namespace TrigSolver
             }
             return ans;
         }
-        private static string SetAlgorithm(string profile)
-        {
-            string ans="";
-            switch (profile)
-            {
-                case "111000": ans = "SSS"; break; // SSS 1 of 1
-                //
-                case "001110": ans = "SAS"; break; // SAS 1 of 3
-                case "010101": ans = "SAS"; break; // SAS 2 of 3
-                case "100011": ans = "SAS"; break; // SAS 3 of 3
-                //
-                case "110001": ans = "ASA"; break; // ASA 1 of 3
-                case "011100": ans = "ASA"; break; // ASA 2 of 3
-                case "101010": ans = "ASA"; break; // ASA 3 of 3
-                //
-                case "110100": ans = "AAS"; break; // AAS 1 of 6
-                case "101100": ans = "AAS"; break; // AAS 2 of 6
-                case "110010": ans = "AAS"; break; // AAS 3 of 6
-                case "011010": ans = "AAS"; break; // AAS 4 of 6
-                case "101001": ans = "AAS"; break; // AAS 5 of 6
-                case "011001": ans = "AAS"; break; // AAS 6 of 6
-                //
-                case "100110": ans = "SSA"; break; // SSA 1 of 6
-                case "100101": ans = "SSA"; break; // SSA 2 of 6
-                case "010110": ans = "SSA"; break; // SSA 3 of 6
-                case "010011": ans = "SSA"; break; // SSA 4 of 6
-                case "001101": ans = "SSA"; break; // SSA 5 of 6
-                case "001011": ans = "SSA"; break; // SSA 6 of 6
-                //
-                case "000111": ans = "AAA"; break; // AAA 1 of 1
 
-
-            }
-            return ans;
-        }
     }
 
-    
+    public class DataSet_SAS1 : DataSet
+    {
+        public double Input1 { get { return Data.lenA; } }
+        public double Input2 { get { return Data.angC; } }
+        public double Input3 { get { return Data.lenB; } }
+
+        public void Calc1(double val) { Data.lenC = val; }
+        public void Calc2(double val) { Data.angA = val; }
+        public void Calc3(double val) { Data.angB = val; }
+
+        public DataSet_SAS1(Data data) : base(data) { }
+    }
+
+
 }
