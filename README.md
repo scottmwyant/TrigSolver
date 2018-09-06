@@ -61,3 +61,8 @@ This class is a sort of wrapper for the specifications.  When a Data object is v
     - If validation passes, the controller calls on teh Solve method in the Trig class
     - The solved method is passed back to the view model.
     - So either the view model needs to know about the controller, meaning the view has to know how to explore the response, but it would probably be better to have the controller pass a response object back to the view model.  This class would have to have contain a Data, a ErrorText and some indicator which one to use.  Perhaps the "ErrorText" would just be "Text" then the text woudl be either positive or negative.   Also, there could be a responseId, something that numerically indicates the status of the response, if things went well or if things went south.
+
+
+    ## The I/O Problem
+
+    - There are 19 different cases.  In each case there is a list of 3 inputs, and 3 calculations are made to find the missing values.  Struggling with how to code this in OOP manner.  Perhaps we need some sort of adapter factory.  You pass in the profile ID ("110011") and get back an adapter?  The adapter would have to know, for 1 specific case, which 3 properties of the data object constitute the input and in which order they are expected.  It would also need to know what piece of data is coming back at each step.
