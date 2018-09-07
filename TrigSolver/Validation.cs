@@ -25,26 +25,6 @@ namespace TrigSolver
 
 
 
-            //  ***** This would be in the controlller?!?
-
-            //consider something that looks like this
-            ISolver solver = SolverFactory(ds.ProfileId); // or DataAdapter?
-
-            solver.Data = ds.Data.Copy;
-            // OR
-            solver.SetData(ds.Data.Copy);
-
-
-            Trig.SolveByProfile(solver, ds.ProfileId);
-
-            // then inside the trig class  -->
-            solver.calc1 = Trig.AnglesSumToPi_SolveForAngle3(solver.input1, solver.input2);
-            return solver.Data // back to the view model
-
-            //*************
-
-
-
 
             
             // Carry out any secondary validation.  More specs will apply to certain cases.

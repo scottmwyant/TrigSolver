@@ -19,7 +19,7 @@ namespace TrigSolverTest
 
             TrigSolver.DataSet ds = new TrigSolver.DataSet(data);
 
-            Assert.AreEqual(ds.Profile, "010000", false);
+            Assert.AreEqual(ds.ProfileId, "010000", false);
         }
 
     }
