@@ -13,13 +13,19 @@ namespace TrigSolverTest
         {
             TrigSolver.Data data = new TrigSolver.Data
             {
-                angA = 0, angB = .15, angC = 0,
-                lenA = 0, lenB = 0, lenC = 0
+                AngA = 0, AngB = .15, AngC = 0,
+                LenA = 0, LenB = 0, LenC = 0
             };
 
             TrigSolver.DataSet ds = new TrigSolver.DataSet(data);
 
-            Assert.AreEqual(ds.ProfileId, "010000", false);
+            Assert.AreEqual(ds.Profile, "010000", false);
+        }
+        [TestMethod]
+        public void Test()
+        {
+            TrigSolver.DataSet ds = GenerateData.SingleDataSet();
+            Assert.AreEqual(6.63324958, ds.Solve().LenC, testPrecision);
         }
 
     }

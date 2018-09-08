@@ -28,11 +28,5 @@ namespace TrigSolverTest
         public void LawOfSines_SolveForLength2_Test()
         { Assert.AreEqual(6, TrigSolver.Trig.LawOfSines_SolveForLength2(Math.PI / 6, 3, Math.PI / 2), testPrecision); }
 
-        [TestMethod]
-        public void Test()
-        { 
-            TrigSolver.Data ans = TrigSolver.Trig.Solve(GenerateData.SingleDataSet());
-            Assert.AreEqual(6.63324958, ans.lenC, testPrecision);
-        }
     }
 }

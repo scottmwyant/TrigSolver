@@ -1,22 +1,21 @@
-﻿using System;
-
+﻿
 namespace TrigSolver
 {
     public class Data
     {
-        public double angA { get; set; }
-        public double angB { get; set; }
-        public double angC { get; set; }
-        public double lenA { get; set; }
-        public double lenB { get; set; }
-        public double lenC { get; set; }
+        public double AngA { get; set; }
+        public double AngB { get; set; }
+        public double AngC { get; set; }
+        public double LenA { get; set; }
+        public double LenB { get; set; }
+        public double LenC { get; set; }
         
         public Data Copy()
         {
             Data ans = new Data
             {
-                angA =this.angA, angB=this.angB, angC=this.angC,
-                lenA =this.lenA, lenB=this.lenB, lenC=this.lenC
+                AngA =this.AngA, AngB=this.AngB, AngC=this.AngC,
+                LenA =this.LenA, LenB=this.LenB, LenC=this.LenC
             };
             return ans;
         }

@@ -8,8 +8,6 @@ namespace TrigSolver
         {
             Console.WriteLine("Hello World!");
             Console.ReadLine();
-            
-            
         }
     }
 }
