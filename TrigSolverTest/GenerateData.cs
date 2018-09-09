@@ -5,20 +5,26 @@ namespace TrigSolverTest
     public static class GenerateData
     {
 
-        public static TrigSolver.DataSet SingleDataSet()
+        public static TrigSolver.DataSet[] Array6 ()
         {
-            TrigSolver.Data d = new TrigSolver.Data()
+            return new TrigSolver.DataSet[]
             {
-                AngA = Math.PI / 180 * 90,
-                AngB = 0,
-                AngC = 0,
-                LenA = 12,
-                LenB = 10,
-                LenC = 0
+                CreateDataSet(new double[] { Math.PI / 180 * 90, 0, 0, 12, 10, 0 }),
+                CreateDataSet(new double[] { 0, 0, 0, 0, 0, 0 }),
+                CreateDataSet(new double[] { 0, 0, 0, 0, 0, 0 }),
+                CreateDataSet(new double[] { 0, 0, 0, 0, 0, 0 }),
+                CreateDataSet(new double[] { 0, 0, 0, 0, 0, 0 }),
+                CreateDataSet(new double[] { 0, 0, 0, 0, 0, 0 })
             };
+        }
 
+
+        private static TrigSolver.DataSet CreateDataSet(double[] data)
+        {
+            TrigSolver.Data d = new TrigSolver.Data() { AngA = data[0], AngB = data[1], AngC = data[2], LenA = data[3], LenB = data[4], LenC = data[5] };
             return new TrigSolver.DataSet(d);
         }
-        
+
+
     }
 }

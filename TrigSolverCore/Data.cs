@@ -1,5 +1,5 @@
 ﻿
-namespace TrigSolver
+namespace TrigSolver.Core
 {
     public class Data
     {
@@ -9,7 +9,7 @@ namespace TrigSolver
         public double LenA { get; set; }
         public double LenB { get; set; }
         public double LenC { get; set; }
-        
+
         public Data Copy()
         {
             Data ans = new Data

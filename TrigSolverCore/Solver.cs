@@ -1,16 +1,14 @@
 ﻿
-namespace TrigSolver
+namespace TrigSolver.Core
 {
     public interface ISolver
     {
         Data Solve(Data data);
-        string Algorithm { get; }
     }
 
     #region Solvers
     public class Solver : ISolver
     {
-        public string Algorithm { get { return ""; } }
         public Data Solve(Data data)
         {
             return data.Copy();
@@ -19,7 +17,6 @@ namespace TrigSolver
 
     public class SSS0 : ISolver
     {
-        public string Algorithm { get { return "SSS"; } }
         public Data Solve(Data data)
         {
             Data d = data.Copy();
@@ -33,7 +30,6 @@ namespace TrigSolver
     
     public class SAS0 : ISolver
     {
-        public string Algorithm { get { return "SAS"; } }
         public Data Solve(Data data)
         {
             Data d = data.Copy();
@@ -45,7 +41,6 @@ namespace TrigSolver
     }
     public class SAS1 : ISolver
     {
-        public string Algorithm { get { return "SAS"; } }
         public Data Solve(Data data)
         {
             Data d = data.Copy();
@@ -57,7 +52,6 @@ namespace TrigSolver
     }
     public class SAS2 : ISolver
     {
-        public string Algorithm { get { return "SAS"; } }
         public Data Solve(Data data)
         {
             Data d = data.Copy();
@@ -69,7 +63,6 @@ namespace TrigSolver
     }
     public class ASA0 : ISolver
     {
-        public string Algorithm { get { return "ASA"; } }
         public Data Solve(Data data)
         {
             Data d = data.Copy();
@@ -81,7 +74,6 @@ namespace TrigSolver
     }
     public class ASA1 : ISolver
     {
-        public string Algorithm { get { return "ASA"; } }
         public Data Solve(Data data)
         {
             Data d = data.Copy();
@@ -92,8 +84,7 @@ namespace TrigSolver
         }
     }
     public class ASA2 : ISolver
-    {
-        public string Algorithm { get { return "ASA"; } }
+    { 
         public Data Solve(Data data)
         {
             Data d = data.Copy();
@@ -105,7 +96,6 @@ namespace TrigSolver
     }
     public class AAS0 : ISolver
     {
-        public string Algorithm { get { return "AAS"; } }
         public Data Solve(Data data)
         {
             Data d = data.Copy();
@@ -117,7 +107,6 @@ namespace TrigSolver
     }
     public class AAS1 : ISolver
     {
-        public string Algorithm { get { return "AAS"; } }
         public Data Solve(Data data)
         {
             Data d = data.Copy();
@@ -129,7 +118,6 @@ namespace TrigSolver
     }
     public class AAS2 : ISolver
     {
-        public string Algorithm { get { return "AAS"; } }
         public Data Solve(Data data)
         {
             Data d = data.Copy();
@@ -141,7 +129,6 @@ namespace TrigSolver
     }
     public class AAS3 : ISolver
     {
-        public string Algorithm { get { return "AAS"; } }
         public Data Solve(Data data)
         {
             Data d = data.Copy();
@@ -153,7 +140,6 @@ namespace TrigSolver
     }
     public class AAS4 : ISolver
     {
-        public string Algorithm { get { return "AAS"; } }
         public Data Solve(Data data)
         {
             Data d = data.Copy();
@@ -165,7 +151,6 @@ namespace TrigSolver
     }
     public class AAS5 : ISolver
     {
-        public string Algorithm { get { return "AAS"; } }
         public Data Solve(Data data)
         {
             Data d = data.Copy();
@@ -177,7 +162,6 @@ namespace TrigSolver
     }
     public class SSA0 : ISolver
     {
-        public string Algorithm { get { return "SSA"; } }
         public Data Solve(Data data)
         {
             Data d = data.Copy();
@@ -189,7 +173,6 @@ namespace TrigSolver
     }
     public class SSA1 : ISolver
     {
-        public string Algorithm { get { return "SSA"; } }
         public Data Solve(Data data)
         {
             Data d = data.Copy();
@@ -201,7 +184,6 @@ namespace TrigSolver
     }
     public class SSA2 : ISolver
     {
-        public string Algorithm { get { return "SSA"; } }
         public Data Solve(Data data)
         {
             Data d = data.Copy();
@@ -213,7 +195,6 @@ namespace TrigSolver
     }
     public class SSA3 : ISolver
     {
-        public string Algorithm { get { return "SSA"; } }
         public Data Solve(Data data)
         {
             Data d = data.Copy();
@@ -225,7 +206,6 @@ namespace TrigSolver
     }
     public class SSA4 : ISolver
     {
-        public string Algorithm { get { return "SSA"; } }
         public Data Solve(Data data)
         {
             Data d = data.Copy();
@@ -237,7 +217,6 @@ namespace TrigSolver
     }
     public class SSA5 : ISolver
     {
-        public string Algorithm { get { return "SSA"; } }
         public Data Solve(Data data)
         {
             Data d = data.Copy();

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace TrigSolver
+namespace TrigSolver.Core
 {
     public class Triple
     {

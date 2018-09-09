@@ -1,5 +1,5 @@
 ﻿
-namespace TrigSolver
+namespace TrigSolver.Core
 {
     public class DataSet
     {
@@ -15,7 +15,7 @@ namespace TrigSolver
         {
             get
             {
-                return new double[] {Data.AngA, Data.AngB, Data.AngC, Data.LenA, Data.LenB, Data.LenC };
+                return new double[] { Data.AngA, Data.AngB, Data.AngC, Data.LenA, Data.LenB, Data.LenC };
             }
         }
         public double[] ArrayLen
@@ -33,8 +33,8 @@ namespace TrigSolver
             }
         }
 
-        public string Profile { get; private set; }
         public string Algorithm { get; private set; }
+        public string Profile { get; private set; }
 
         private ISolver solver;
 
@@ -44,14 +44,13 @@ namespace TrigSolver
             Angles = new Triple(new double[] { data.AngA, data.AngB, data.AngC });
             Lengths = new Triple(new double[] { data.LenA, data.LenB, data.LenC });
             CountAng = CountNonZeros(Angles.Arr);
-            CountLen= CountNonZeros(Lengths.Arr);
-            Profile=SetProfile(ArrayAll);
-            solver = Factory.GetSolver(Profile);
-            Algorithm = solver.Algorithm;
+            CountLen = CountNonZeros(Lengths.Arr);
+            Profile = SetProfile(this.ArrayAll);
+            solver = Factory.GetSolver(this.Profile);
+            Algorithm = solver.GetType().Name.Substring(0,3);
         }
         public Data Solve()
         {
-            ISolver solver = Factory.GetSolver(this.Profile);
             return solver.Solve(this.Data);
         }
         private static int CountNonZeros(double[] arr)

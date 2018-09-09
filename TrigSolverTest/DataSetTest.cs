@@ -24,8 +24,10 @@ namespace TrigSolverTest
         [TestMethod]
         public void Test()
         {
-            TrigSolver.DataSet ds = GenerateData.SingleDataSet();
-            Assert.AreEqual(6.63324958, ds.Solve().LenC, testPrecision);
+            TrigSolver.DataSet[] ds = GenerateData.Array6();
+            Assert.AreEqual(6.63324958, ds[0].Solve().LenC, testPrecision);
+            //TrigSolver.DataSet dset = new TrigSolver.DataSet(new TrigSolver.Data());
+            //TrigSolver.Data ans = dset.Solve();
         }
 
     }

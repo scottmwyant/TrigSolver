@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace TrigSolver
+namespace TrigSolver.Core
 {
-    abstract class Specification
+    public abstract class Specification
     {
 
         internal string ErrorMessage{ get { return errorText; } }
@@ -13,7 +13,7 @@ namespace TrigSolver
     }
 
 
-    class Spec_ThreeInputs : Specification
+    public class Spec_ThreeInputs : Specification
     {   
         public override bool IsSatisfiedBy(DataSet ds)
         {
@@ -23,7 +23,7 @@ namespace TrigSolver
             return (count==3);
         }
     }
-    class Spec_AtLeastOneLength : Specification
+    public class Spec_AtLeastOneLength : Specification
     {
         public override bool IsSatisfiedBy(DataSet ds)
         {
@@ -37,7 +37,7 @@ namespace TrigSolver
 
         }
     }
-    class Spec_ThreeLengths : Specification
+    public class Spec_ThreeLengths : Specification
     {
         public override bool IsSatisfiedBy(DataSet ds)
         {
@@ -62,11 +62,11 @@ namespace TrigSolver
         }
         private string setErrorText(DataSet ds)
         {
-            double gap = new double(); // calculate the gap here to feed a metric into the error message
+            //double gap = new double(); // calculate the gap here to feed a metric into the error message
             return "The three side lengths given cannot form a triangle.  Either make the biggest length smaller by X or one of the other ones longer by X.";
         }
     }
-    class Spec_SumOfAngles : Specification
+    public class Spec_SumOfAngles : Specification
     {
         public override bool IsSatisfiedBy(DataSet ds)
         {
@@ -78,7 +78,7 @@ namespace TrigSolver
             }
         }
     }
-    class Spec_SideLengthForSSA : Specification
+    public class Spec_SideLengthForSSA : Specification
     {
         public override bool IsSatisfiedBy(DataSet ds)
         {
