@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2016
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrigSolverTest", "TrigSolverTest\TrigSolverTest.csproj", "{797793C7-FDE4-4686-83FC-DA6FE675A65B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrigSolver.Test", "TrigSolver.Test\TrigSolver.Test.csproj", "{797793C7-FDE4-4686-83FC-DA6FE675A65B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrigSolverWinForms", "TrigSolverWinForms\TrigSolverWinForms.csproj", "{EF0DBE71-2842-407D-A64D-07F3361AE72E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrigSolver.WinForms", "TrigSolver.WinForms\TrigSolver.WinForms.csproj", "{EF0DBE71-2842-407D-A64D-07F3361AE72E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrigSolverCore", "TrigSolverCore\TrigSolverCore.csproj", "{52A0050F-4AB7-4698-AC03-43537A60138D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrigSolver.Core", "TrigSolver.Core\TrigSolver.Core.csproj", "{52A0050F-4AB7-4698-AC03-43537A60138D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

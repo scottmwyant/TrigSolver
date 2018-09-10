@@ -10,7 +10,7 @@ namespace TrigSolver.Core
         {
             DataSet ds = new DataSet(data);
 
-            Response response = new Response();
+            ControllerResponse response = new ControllerResponse();
 
             if(Validation.Test(ds).Error)
             {

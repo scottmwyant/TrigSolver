@@ -20,7 +20,7 @@ namespace TrigSolver.Core
             }
 
             // Build a response object (with a constructor???)
-            Response response = new Response()
+            ControllerResponse response = new ControllerResponse()
             {
                 Error = error,
                 Text = ErrorMessage

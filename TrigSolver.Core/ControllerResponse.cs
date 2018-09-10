@@ -9,7 +9,7 @@ namespace TrigSolver.Core
 
     }
 
-    internal class Response : IResponse
+    internal class ControllerResponse : IResponse
     {
         public Data Solution { get; internal set; }
         public string Text { get; internal set; }
