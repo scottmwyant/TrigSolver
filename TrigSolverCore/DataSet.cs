@@ -1,7 +1,7 @@
 ﻿
 namespace TrigSolver.Core
 {
-    public class DataSet
+    internal class DataSet
     {
         public Data Data { get; }
         public Triple Angles { get; }

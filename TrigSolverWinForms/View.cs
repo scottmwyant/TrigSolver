@@ -3,52 +3,45 @@ using System.Windows.Forms;
 
 namespace TrigSolver.WinForms
 {
-    public partial class View : Form
+    internal partial class View : Form
     {
-
-        public string AngA { get { return textBox1.Text; } }
-        public string AngB { get { return textBox2.Text; } }
-        public string AngC { get { return textBox3.Text; } }
-
-        public string LenA { get { return textBox4.Text; } }
-        public string LenB { get { return textBox5.Text; } }
-        public string LenC { get { return textBox6.Text; } }
-
-        public View()
+        // Constructor
+        internal View()
         {
             InitializeComponent();
         }
 
         private void button1_Click(object sender, EventArgs e)
-        {
-            textBox1.Text = (Math.PI / 180 * 90).ToString();
-            textBox2.Text = (0).ToString();
-            textBox3.Text = (0).ToString();
-            textBox4.Text = (12).ToString();
-            textBox5.Text = (10).ToString();
-            textBox6.Text = (0).ToString();
-
+        { 
             // Create the data object
             TrigSolver.Core.Data data = new Core.Data()
             {
-                AngA = Parse(this.AngA),
-                AngB = Parse(this.AngB),
-                AngC = Parse(this.AngC),
-                LenA = Parse(this.LenA),
-                LenB = Parse(this.LenB),
-                LenC = Parse(this.LenC),
+                AngA = Parse(this.textBox1.Text),
+                AngB = Parse(this.textBox2.Text),
+                AngC = Parse(this.textBox3.Text),
+                LenA = Parse(this.textBox4.Text),
+                LenB = Parse(this.textBox5.Text),
+                LenC = Parse(this.textBox6.Text),
             };
 
-            // Pass the data object into the app core
-            Core.Controller.Execute(data);
-            MessageBox.Show("Valid = " + Core.Controller.Valid.ToString());
+            // Pass the data object into the controller
+            TrigSolver.Core.IResponse response = TrigSolver.Core.Controller.Invoke(data);
 
-            textBox1.Text = Core.Controller.Response.AngA.ToString();
-            textBox2.Text = Core.Controller.Response.AngB.ToString();
-            textBox3.Text = Core.Controller.Response.AngC.ToString();
-            textBox4.Text = Core.Controller.Response.LenA.ToString();
-            textBox5.Text = Core.Controller.Response.LenB.ToString();
-            textBox6.Text = Core.Controller.Response.LenC.ToString();
+            // Handle the controller's response
+            if(response.Error)
+            {
+                MessageBox.Show(response.Text);
+            }
+            else
+            {
+                textBox1.Text = response.Solution.AngA.ToString();
+                textBox2.Text = response.Solution.AngB.ToString();
+                textBox3.Text = response.Solution.AngC.ToString();
+                textBox4.Text = response.Solution.LenA.ToString();
+                textBox5.Text = response.Solution.LenB.ToString();
+                textBox6.Text = response.Solution.LenC.ToString();
+            }
+            
         }
 
         private static double Parse(string str)
@@ -58,5 +51,16 @@ namespace TrigSolver.WinForms
             if (ans < 0) { ans = 0; }
             return ans;
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            // ** Artificially populate the textboxes on the form
+            textBox1.Text = (Math.PI / 180 * 90).ToString();
+            textBox2.Text = (0).ToString();
+            textBox3.Text = (0).ToString();
+            textBox4.Text = (12).ToString();
+            textBox5.Text = (10).ToString();
+            textBox6.Text = (0).ToString();
+    }
     }
 }

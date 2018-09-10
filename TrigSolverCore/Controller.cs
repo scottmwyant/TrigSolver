@@ -6,18 +6,28 @@ namespace TrigSolver.Core
 {
     public static class Controller
     {
-        public static bool Valid { get; private set; }
-        public static Data Response { get; private set; }
-
-        public static void Execute(Core.Data data)
+        public static IResponse Invoke(Core.Data data)
         {
-            Core.DataSet ds = new DataSet(data);
+            DataSet ds = new DataSet(data);
 
-            Valid = Core.Validation.Test(ds);
+            Response response = new Response();
 
-            Response = ds.Solve();
+            if(Validation.Test(ds).Error)
+            {
+                response.Error = true;
+                response.Solution = new Data();
+                response.Text = Validation.ErrorMessage;
+                
+            }
+            else
+            {
+                response.Error = false;
+                response.Solution = ds.Solve();
+                response.Text = "Solved";
+            }
+            
 
-           
+            return response;
         }
     }
 }

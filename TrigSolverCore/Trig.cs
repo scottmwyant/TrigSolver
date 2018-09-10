@@ -1,7 +1,7 @@
 ﻿using System;
 namespace TrigSolver.Core
 {
-    public static class Trig
+    internal static class Trig
     {
         public static double AnglesSumToPi_SolveForAngle3(double angle1, double angle2)
         { return (Math.PI - angle1 - angle2); }

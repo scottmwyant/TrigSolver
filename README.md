@@ -42,27 +42,29 @@ This class is a sort of wrapper for the specifications.  When a Data object is v
 - [System.Collections.BitArray](https://docs.microsoft.com/en-us/dotnet/api/system.collections.bitarray.-ctor?view=netframework-4.7.2)
 - [btye - C# Reference](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/byte)
 
-## Working Notes
 
-- The DataSet is the profiler.  This class encapsulates all the logic for determining the 123456 profile and the algorithm ("ASA", etc).
+# Development Notes
 
-- Validation will return boolean.  Then there will be a response object on the validation class that can be explorted if the validation fails.
+## The I/O Problem
 
-- The actual solving will be done with a static method in the Trig class.
+- There are 19 different cases.  In each case there is a list of 3 inputs, and 3 calculations are made to find the missing values.  Struggling with how to code this in OOP manner.  Perhaps we need some sort of adapter factory.  You pass in the profile ID ("110011") and get back an adapter?  The adapter would have to know, for 1 specific case, which 3 properties of the data object constitute the input and in which order they are expected.  It would also need to know what piece of data is coming back at each step.
 
-- The general flow is as follows:
+#### RESOLVED : 
 
-  - Generate data (view or view model is responsible for this)
-  
-  - Pass the data into the controller.
-    
-    - Inside the controller, the data is used to construct a DataSet object then that is passed into Validation.
-    - If Validation fails, some error message is sent back to the view model
-    - If validation passes, the controller calls on teh Solve method in the Trig class
-    - The solved method is passed back to the view model.
-    - So either the view model needs to know about the controller, meaning the view has to know how to explore the response, but it would probably be better to have the controller pass a response object back to the view model.  This class would have to have contain a Data, a ErrorText and some indicator which one to use.  Perhaps the "ErrorText" would just be "Text" then the text woudl be either positive or negative.   Also, there could be a responseId, something that numerically indicates the status of the response, if things went well or if things went south.
+-  This problem was solved by defining an interface, a factory, and 19 implementations of the interface.  The primary object we're talking about here is the 'Solver'.  The interface ISolver defines one method, a method that takes one argument of type 'Data' and returns type 'Data'.  The object that is returned is not "new-ed up" but is a copy of the argument.  Then there are 3 steps taken to write values to the 3 missing properties in that 'Data' object.  
 
+## Multi-Project Layout (MVC / MVVM Patterns)
 
-    ## The I/O Problem
+### Controller
 
-    - There are 19 different cases.  In each case there is a list of 3 inputs, and 3 calculations are made to find the missing values.  Struggling with how to code this in OOP manner.  Perhaps we need some sort of adapter factory.  You pass in the profile ID ("110011") and get back an adapter?  The adapter would have to know, for 1 specific case, which 3 properties of the data object constitute the input and in which order they are expected.  It would also need to know what piece of data is coming back at each step.
+The controller is the core component of the app.  The controller component is used in the following manner.  You hand over a set of inputs using the 'Data' DTO, then look at the state of the response object.  The response is reutrned from the controller.  This object that is returned should implement an interface since the view needs to know how to use it.
+
+This way, the controller takes the input and generates a response, but itself holds no state.
+
+### View
+
+- 9/9 - Trying to decide if the view *is* the form or if it goes between the controller and the form.  Leaning toward making the form the view, as different views may implement different functionalities.  There would be a console app view, winforms view, electron view, etc...
+
+- The view is responsible for passing a 'Data' object to the controller then presenting the controller's response to the user.
+
+- The view could also be responsible for formatting the forms textboxes, updating sketch, etc.

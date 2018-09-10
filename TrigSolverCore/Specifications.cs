@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TrigSolver.Core
 {
-    public abstract class Specification
+    internal abstract class Specification
     {
 
         internal string ErrorMessage{ get { return errorText; } }
@@ -13,7 +13,7 @@ namespace TrigSolver.Core
     }
 
 
-    public class Spec_ThreeInputs : Specification
+    internal class Spec_ThreeInputs : Specification
     {   
         public override bool IsSatisfiedBy(DataSet ds)
         {
@@ -23,7 +23,7 @@ namespace TrigSolver.Core
             return (count==3);
         }
     }
-    public class Spec_AtLeastOneLength : Specification
+    internal class Spec_AtLeastOneLength : Specification
     {
         public override bool IsSatisfiedBy(DataSet ds)
         {
@@ -37,7 +37,7 @@ namespace TrigSolver.Core
 
         }
     }
-    public class Spec_ThreeLengths : Specification
+    internal class Spec_ThreeLengths : Specification
     {
         public override bool IsSatisfiedBy(DataSet ds)
         {
@@ -66,7 +66,7 @@ namespace TrigSolver.Core
             return "The three side lengths given cannot form a triangle.  Either make the biggest length smaller by X or one of the other ones longer by X.";
         }
     }
-    public class Spec_SumOfAngles : Specification
+    internal class Spec_SumOfAngles : Specification
     {
         public override bool IsSatisfiedBy(DataSet ds)
         {
@@ -78,7 +78,7 @@ namespace TrigSolver.Core
             }
         }
     }
-    public class Spec_SideLengthForSSA : Specification
+    internal class Spec_SideLengthForSSA : Specification
     {
         public override bool IsSatisfiedBy(DataSet ds)
         {

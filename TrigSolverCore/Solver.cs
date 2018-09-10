@@ -1,13 +1,13 @@
 ﻿
 namespace TrigSolver.Core
 {
-    public interface ISolver
+    internal interface ISolver
     {
         Data Solve(Data data);
     }
 
     #region Solvers
-    public class Solver : ISolver
+    internal class Solver : ISolver
     {
         public Data Solve(Data data)
         {
@@ -15,7 +15,7 @@ namespace TrigSolver.Core
         }
     }
 
-    public class SSS0 : ISolver
+    internal class SSS0 : ISolver
     {
         public Data Solve(Data data)
         {
@@ -28,7 +28,7 @@ namespace TrigSolver.Core
     }
 
     
-    public class SAS0 : ISolver
+    internal class SAS0 : ISolver
     {
         public Data Solve(Data data)
         {
@@ -39,7 +39,7 @@ namespace TrigSolver.Core
             return d;
         }
     }
-    public class SAS1 : ISolver
+    internal class SAS1 : ISolver
     {
         public Data Solve(Data data)
         {
@@ -50,7 +50,7 @@ namespace TrigSolver.Core
             return d;
         }
     }
-    public class SAS2 : ISolver
+    internal class SAS2 : ISolver
     {
         public Data Solve(Data data)
         {
@@ -61,7 +61,7 @@ namespace TrigSolver.Core
             return d;
         }
     }
-    public class ASA0 : ISolver
+    internal class ASA0 : ISolver
     {
         public Data Solve(Data data)
         {
@@ -72,7 +72,7 @@ namespace TrigSolver.Core
             return d;
         }
     }
-    public class ASA1 : ISolver
+    internal class ASA1 : ISolver
     {
         public Data Solve(Data data)
         {
@@ -83,7 +83,7 @@ namespace TrigSolver.Core
             return d;
         }
     }
-    public class ASA2 : ISolver
+    internal class ASA2 : ISolver
     { 
         public Data Solve(Data data)
         {
@@ -94,7 +94,7 @@ namespace TrigSolver.Core
             return d;
         }
     }
-    public class AAS0 : ISolver
+    internal class AAS0 : ISolver
     {
         public Data Solve(Data data)
         {
@@ -105,7 +105,7 @@ namespace TrigSolver.Core
             return d;
         }
     }
-    public class AAS1 : ISolver
+    internal class AAS1 : ISolver
     {
         public Data Solve(Data data)
         {
@@ -116,7 +116,7 @@ namespace TrigSolver.Core
             return d;
         }
     }
-    public class AAS2 : ISolver
+    internal class AAS2 : ISolver
     {
         public Data Solve(Data data)
         {
@@ -127,7 +127,7 @@ namespace TrigSolver.Core
             return d;
         }
     }
-    public class AAS3 : ISolver
+    internal class AAS3 : ISolver
     {
         public Data Solve(Data data)
         {
@@ -138,7 +138,7 @@ namespace TrigSolver.Core
             return d;
         }
     }
-    public class AAS4 : ISolver
+    internal class AAS4 : ISolver
     {
         public Data Solve(Data data)
         {
@@ -149,7 +149,7 @@ namespace TrigSolver.Core
             return d;
         }
     }
-    public class AAS5 : ISolver
+    internal class AAS5 : ISolver
     {
         public Data Solve(Data data)
         {
@@ -160,7 +160,7 @@ namespace TrigSolver.Core
             return d;
         }
     }
-    public class SSA0 : ISolver
+    internal class SSA0 : ISolver
     {
         public Data Solve(Data data)
         {
@@ -171,7 +171,7 @@ namespace TrigSolver.Core
             return d;
         }
     }
-    public class SSA1 : ISolver
+    internal class SSA1 : ISolver
     {
         public Data Solve(Data data)
         {
@@ -182,7 +182,7 @@ namespace TrigSolver.Core
             return d;
         }
     }
-    public class SSA2 : ISolver
+    internal class SSA2 : ISolver
     {
         public Data Solve(Data data)
         {
@@ -193,7 +193,7 @@ namespace TrigSolver.Core
             return d;
         }
     }
-    public class SSA3 : ISolver
+    internal class SSA3 : ISolver
     {
         public Data Solve(Data data)
         {
@@ -204,7 +204,7 @@ namespace TrigSolver.Core
             return d;
         }
     }
-    public class SSA4 : ISolver
+    internal class SSA4 : ISolver
     {
         public Data Solve(Data data)
         {
@@ -215,7 +215,7 @@ namespace TrigSolver.Core
             return d;
         }
     }
-    public class SSA5 : ISolver
+    internal class SSA5 : ISolver
     {
         public Data Solve(Data data)
         {
@@ -228,7 +228,7 @@ namespace TrigSolver.Core
     }
     #endregion
 
-    public static class Factory
+    internal static class Factory
     {
         public static ISolver GetSolver(string profileId)
         {
