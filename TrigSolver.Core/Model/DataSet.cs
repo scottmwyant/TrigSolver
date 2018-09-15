@@ -1,5 +1,5 @@
 ﻿
-namespace TrigSolver.Core
+namespace TrigSolver.Core.Model
 {
     internal class DataSet
     {

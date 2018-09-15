@@ -84,7 +84,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TrigSolverCore\TrigSolver.Core.csproj">
+    <ProjectReference Include="..\TrigSolver.Core\TrigSolver.Core.csproj">
       <Project>{52a0050f-4ab7-4698-ac03-43537a60138d}</Project>
       <Name>TrigSolver.Core</Name>
     </ProjectReference>

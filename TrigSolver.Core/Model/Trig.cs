@@ -1,5 +1,5 @@
 ﻿using System;
-namespace TrigSolver.Core
+namespace TrigSolver.Core.Model
 {
     internal static class Trig
     {

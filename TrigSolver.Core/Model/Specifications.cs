@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace TrigSolver.Core
+namespace TrigSolver.Core.Model
 {
     internal abstract class Specification
     {

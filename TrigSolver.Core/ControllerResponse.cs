@@ -1,15 +1,8 @@
-﻿
+﻿using TrigSolver.Core.Model;
+
 namespace TrigSolver.Core
-{
-    public interface IResponse
-    {
-        Data Solution { get; }
-        string Text { get; }
-        bool Error { get; }
-
-    }
-
-    internal class ControllerResponse : IResponse
+{ 
+    internal class ControllerResponse 
     {
         public Data Solution { get; internal set; }
         public string Text { get; internal set; }

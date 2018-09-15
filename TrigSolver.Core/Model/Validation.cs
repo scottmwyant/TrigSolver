@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TrigSolver.Core
+namespace TrigSolver.Core.Model
 {
     internal static class Validation
     {
@@ -8,7 +8,7 @@ namespace TrigSolver.Core
         private static bool error = new bool();
         private static DataSet myDs;
 
-        public static IResponse Test(DataSet ds)
+        public static ControllerResponse Test(DataSet ds)
         {
             myDs = ds;
             Eval(new Spec_ThreeInputs());
@@ -45,10 +45,6 @@ namespace TrigSolver.Core
             }
             
         }
-
-
-
-
 
     }
 
