@@ -8,16 +8,29 @@ namespace TrigSolver.Core
 {
     public interface IViewMain
     {
+        //
+        // properties
+        //
         string AngleA { get; set; }
         string AngleB { get; set; }
         string AngleC { get; set; }
         string LengthA { get; set; }
         string LengthB { get; set; }
         string LengthC { get; set; }
+        bool AngleAEnabled { get; set; }
+        bool AngleBEnabled { get; set; }
+        bool AngleCEnabled { get; set; }
+        bool LengthAEnabled { get; set; }
+        bool LengthBEnabled { get; set; }
+        bool LengthCEnabled { get; set; }
+        bool Solved { get; set; }
         bool Degrees { get; }
 
-        IController Controller { set; }
-
+        //
+        // methods
+        //
+        void SetController(IController controller);
+        void SetProfile(string profile);
         void MessageBox(string message);
 
     }

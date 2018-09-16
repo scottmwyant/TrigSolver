@@ -49,7 +49,6 @@
     <Compile Include="Model\Data.cs" />
     <Compile Include="Model\DataSet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ControllerResponse.cs" />
     <Compile Include="Model\Solver.cs" />
     <Compile Include="Model\Specifications.cs" />
     <Compile Include="Model\Trig.cs" />

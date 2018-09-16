@@ -16,4 +16,4 @@ The MVC or MVVM pattern is loosely implemented here.  The goal is to show sepera
 - [System.Collections.BitArray](https://docs.microsoft.com/en-us/dotnet/api/system.collections.bitarray.-ctor?view=netframework-4.7.2)
 - [btye - C# Reference](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/byte)
 - [SO thread](https://stackoverflow.com/q/3058/7969520)
-- [Another sample project on GitHub](https://github.com/mrts/winforms-mvp/blob/master/WinFormsMVP/WinFormsMVP/Program.cs)
+- [Another sample project on GitHub](https://github.com/mrts/winforms-mvp)

@@ -8,7 +8,7 @@ namespace TrigSolver.Core.Model
         private static bool error = new bool();
         private static DataSet myDs;
 
-        public static ControllerResponse Test(DataSet ds)
+        public static ValidationResponse Test(DataSet ds)
         {
             myDs = ds;
             Eval(new Spec_ThreeInputs());
@@ -20,7 +20,7 @@ namespace TrigSolver.Core.Model
             }
 
             // Build a response object (with a constructor???)
-            ControllerResponse response = new ControllerResponse()
+            ValidationResponse response = new ValidationResponse()
             {
                 Error = error,
                 Text = ErrorMessage

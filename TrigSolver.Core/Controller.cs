@@ -4,6 +4,16 @@ namespace TrigSolver.Core
 {
     internal class Controller : IController
     {
+        private int precision = 4;
+
+        private class ControllerResponse
+        {
+            public Data Solution { get; set; }
+            public string Text { get; set; }
+            public bool Error { get; set; }
+            public string Profile { get; set; }
+        }
+
         private IViewMain view;
 
 
@@ -15,10 +25,19 @@ namespace TrigSolver.Core
         internal Controller(IViewMain view)
         {
             this.view = view;
-            this.view.Controller = this;
+            this.view.SetController(this);
         }
 
-        public void ButtonClickRun()
+        public void SwitchUnits()
+        {
+            double k;
+            if (view.Degrees) { k = 180 / System.Math.PI; } else { k = System.Math.PI / 180; }
+            view.AngleA = System.Math.Round(ParseInputText(view.AngleA) * k, precision).ToString();
+            view.AngleB = System.Math.Round(ParseInputText(view.AngleB) * k, precision).ToString();
+            view.AngleC = System.Math.Round(ParseInputText(view.AngleC) * k, precision).ToString();
+        }
+
+        public void Solve()
         {
             // This method is called by an event handler in the view.
             // This method could be implemented as an event handler itself
@@ -30,6 +49,8 @@ namespace TrigSolver.Core
             // Create the data object
             Data input = ReadInputFromView();
 
+            
+
 
 
             // Pass the data object into the controller
@@ -39,31 +60,50 @@ namespace TrigSolver.Core
             if (response.Error)
             {
                 view.MessageBox(response.Text);
+
+                view.AngleAEnabled = true;
+                view.AngleBEnabled = true;
+                view.AngleCEnabled = true;
+                view.LengthAEnabled = true;
+                view.LengthBEnabled = true;
+                view.LengthCEnabled = true;
             }
             else
             {
-                view.AngleA = response.Solution.AngA.ToString();
-                view.AngleB = response.Solution.AngB.ToString();
-                view.AngleC = response.Solution.AngC.ToString();
-                view.LengthA = response.Solution.LenA.ToString();
-                view.LengthB = response.Solution.LenB.ToString();
-                view.LengthC = response.Solution.LenC.ToString();
+                view.AngleA = System.Math.Round(response.Solution.AngA, precision).ToString();
+                view.AngleB = System.Math.Round(response.Solution.AngB, precision).ToString();
+                view.AngleC = System.Math.Round(response.Solution.AngC, precision).ToString();
+                view.LengthA = System.Math.Round(response.Solution.LenA, precision).ToString();
+                view.LengthB = System.Math.Round(response.Solution.LenB, precision).ToString();
+                view.LengthC = System.Math.Round(response.Solution.LenC, precision).ToString();
+
+                char[] arr = response.Profile.ToCharArray();
+                view.AngleAEnabled = ('1' == arr[0]);
+                view.AngleBEnabled = ('1' == arr[1]);
+                view.AngleCEnabled = ('1' == arr[2]);
+                view.LengthAEnabled = ('1' == arr[3]);
+                view.LengthBEnabled = ('1' == arr[4]);
+                view.LengthCEnabled = ('1' == arr[5]);
             }
         }
 
         private Data ReadInputFromView()
         {
+            double k;
+            if (view.Degrees) { k = System.Math.PI/180; } else { k = 1; }
             Data data = new Data()
             {
-                AngA = ParseInputText(view.AngleA),
-                AngB = ParseInputText(view.AngleB),
-                AngC = ParseInputText(view.AngleC),
-                LenA = ParseInputText(view.LengthA),
-                LenB = ParseInputText(view.LengthB),
-                LenC = ParseInputText(view.LengthC),
+                AngA = ParseInputText(view.AngleA) * k * System.Convert.ToInt16(view.AngleAEnabled),
+                AngB = ParseInputText(view.AngleB) * k * System.Convert.ToInt16(view.AngleAEnabled),
+                AngC = ParseInputText(view.AngleC) * k * System.Convert.ToInt16(view.AngleAEnabled),
+                LenA = ParseInputText(view.LengthA) * System.Convert.ToInt16(view.AngleAEnabled),
+                LenB = ParseInputText(view.LengthB) * System.Convert.ToInt16(view.AngleAEnabled),
+                LenC = ParseInputText(view.LengthC) * System.Convert.ToInt16(view.AngleAEnabled),
             };
             return data;
         }
+            
+        
 
 
 
@@ -86,6 +126,7 @@ namespace TrigSolver.Core
                 response.Error = false;
                 response.Solution = ds.Solve();
                 response.Text = "Solved";
+                response.Profile = ds.Profile;
             }
 
 
