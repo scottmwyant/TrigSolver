@@ -4,7 +4,7 @@ namespace TrigSolver.Core.Model
 {
     internal static class Validation
     {
-        public static string ErrorMessage;
+        private static string ErrorMessage;
         private static bool error = new bool();
         private static DataSet myDs;
 
@@ -20,11 +20,7 @@ namespace TrigSolver.Core.Model
             }
 
             // Build a response object (with a constructor???)
-            ValidationResponse response = new ValidationResponse()
-            {
-                Error = error,
-                Text = ErrorMessage
-            };
+            ValidationResponse response = new ValidationResponse(error, ErrorMessage);
 
             ErrorMessage = "";
             error = false;

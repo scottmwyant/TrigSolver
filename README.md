@@ -17,3 +17,10 @@ The MVC or MVVM pattern is loosely implemented here.  The goal is to show sepera
 - [btye - C# Reference](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/byte)
 - [SO thread](https://stackoverflow.com/q/3058/7969520)
 - [Another sample project on GitHub](https://github.com/mrts/winforms-mvp)
+
+
+# Dev Notes
+
+## TODO
+
+- Need to figure out how to set up testing.

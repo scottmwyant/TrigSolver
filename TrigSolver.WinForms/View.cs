@@ -15,12 +15,12 @@ namespace TrigSolver.WinForms
         public string LengthA { get { return textBox4.Text; } set { SetTextBoxText(textBox4, value); } }
         public string LengthB { get { return textBox5.Text; } set { SetTextBoxText(textBox5, value); } }
         public string LengthC { get { return textBox6.Text; } set { SetTextBoxText(textBox6, value); } }
-        public bool AngleAEnabled { get { return textBox1.Enabled; } set { SetTextBoxState(textBox1, value); } }
-        public bool AngleBEnabled { get { return textBox2.Enabled; } set { SetTextBoxState(textBox2, value); } }
-        public bool AngleCEnabled { get { return textBox3.Enabled; } set { SetTextBoxState(textBox3, value); } }
-        public bool LengthAEnabled { get { return textBox4.Enabled; } set { SetTextBoxState(textBox4, value); } }
-        public bool LengthBEnabled { get { return textBox5.Enabled; } set { SetTextBoxState(textBox5, value); } }
-        public bool LengthCEnabled { get { return textBox6.Enabled; } set { SetTextBoxState(textBox6, value); } }
+        public bool AngleAEnabled { get { return !textBox1.ReadOnly; } set { SetTextBoxState(textBox1, value); } }
+        public bool AngleBEnabled { get { return !textBox2.ReadOnly; } set { SetTextBoxState(textBox2, value); } }
+        public bool AngleCEnabled { get { return !textBox3.ReadOnly; } set { SetTextBoxState(textBox3, value); } }
+        public bool LengthAEnabled { get { return !textBox4.ReadOnly; } set { SetTextBoxState(textBox4, value); } }
+        public bool LengthBEnabled { get { return !textBox5.ReadOnly; } set { SetTextBoxState(textBox5, value); } }
+        public bool LengthCEnabled { get { return !textBox6.ReadOnly; } set { SetTextBoxState(textBox6, value); } }
         public bool Solved { get; set; }
         public bool Degrees { get; private set; }
 
@@ -28,7 +28,7 @@ namespace TrigSolver.WinForms
         // fields
         //
         private IController controller;
-        private string profile;
+        
 
         //
         // public methods
@@ -37,15 +37,15 @@ namespace TrigSolver.WinForms
         {
             this.controller = controller;
         }
-        public void SetProfile(string profile)
-        {
-            this.profile = profile;
-        }
         public void MessageBox(string message)
         {
             System.Windows.Forms.MessageBox.Show(message);
         }
-
+        public void SetStatusText(string shortText, string longText)
+        {
+            textBox7.Text = shortText;
+            textBox8.Text = longText;
+        }
         //
         // private methods
         //
@@ -66,16 +66,10 @@ namespace TrigSolver.WinForms
             textBox5.Text = (10).ToString();
             textBox6.Text = (0).ToString();
         }
-        private void button3_Click(object sender, EventArgs e)
-        {
-            Degrees = !Degrees;
-            controller.SwitchUnits();
-            if (Degrees) { button3.Text = "Use Radians"; } else { button3.Text = "Use Degrees"; }
-
-        }
         private void TextBox_TextChanged(object sender, EventArgs e)
         {
             controller.Solve();
+
         }
         private void SetTextBoxText(TextBox tbx, string str)
         {
@@ -86,7 +80,7 @@ namespace TrigSolver.WinForms
         }
         private void SetTextBoxState(TextBox tbx, bool enabled)
         {
-            tbx.ReadOnly = enabled;
+            tbx.ReadOnly = !enabled;
             if (enabled)
             {
                 tbx.BackColor = System.Drawing.Color.White;
@@ -98,6 +92,21 @@ namespace TrigSolver.WinForms
                 tbx.ForeColor = System.Drawing.Color.Gray;
             }
 
+        }
+
+
+
+        private void UnitsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            degreesToolStripMenuItem.Checked = !degreesToolStripMenuItem.Checked;
+            radiansToolStripMenuItem.Checked = !radiansToolStripMenuItem.Checked;
+            Degrees = !Degrees;
+            controller.SwitchUnits();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

@@ -4,7 +4,7 @@ namespace TrigSolver.Core
 {
     internal class Controller : IController
     {
-        private int precision = 4;
+        private int precision = 6;
 
         private class ControllerResponse
         {
@@ -26,15 +26,25 @@ namespace TrigSolver.Core
         {
             this.view = view;
             this.view.SetController(this);
+            this.view.SetStatusText("Waiting for input", null);
         }
 
         public void SwitchUnits()
         {
+
             double k;
             if (view.Degrees) { k = 180 / System.Math.PI; } else { k = System.Math.PI / 180; }
-            view.AngleA = System.Math.Round(ParseInputText(view.AngleA) * k, precision).ToString();
-            view.AngleB = System.Math.Round(ParseInputText(view.AngleB) * k, precision).ToString();
-            view.AngleC = System.Math.Round(ParseInputText(view.AngleC) * k, precision).ToString();
+
+            double ans;
+
+            ans = ParseInputText(view.AngleA);
+            if (ans > 0) { view.AngleA = System.Math.Round(ans * k, precision).ToString(); } else { view.AngleA = null; }
+
+            ans = ParseInputText(view.AngleB);
+            if (ans > 0) { view.AngleB = System.Math.Round(ans * k, precision).ToString(); } else { view.AngleB = null; }
+
+            ans = ParseInputText(view.AngleC);
+            if (ans > 0) { view.AngleC = System.Math.Round(ans * k, precision).ToString(); } else { view.AngleC = null; }
         }
 
         public void Solve()
@@ -49,18 +59,24 @@ namespace TrigSolver.Core
             // Create the data object
             Data input = ReadInputFromView();
 
+            // The line above should be capturing a validation response.
+            DataSet ds = new DataSet(input);
+            ValidationResponse rsp = Validation.Test(ds);
             
-
-
-
-            // Pass the data object into the controller
-            ControllerResponse response = Evaluate(input);
-
             // Handle the controller's response
-            if (response.Error)
+            if (rsp.Error)
             {
-                view.MessageBox(response.Text);
+                view.SetStatusText("Error", rsp.Text);
 
+                // Clear boxes that are disabled
+                if (!view.AngleAEnabled) { view.AngleA = null; }
+                if (!view.AngleBEnabled) { view.AngleB = null; }
+                if (!view.AngleCEnabled) { view.AngleC = null; }
+                if( !view.LengthAEnabled) { view.LengthA = null; }
+                if (!view.LengthBEnabled) { view.LengthB = null; }
+                if (!view.LengthCEnabled) { view.LengthC = null; }
+
+                // Enable all textboxes
                 view.AngleAEnabled = true;
                 view.AngleBEnabled = true;
                 view.AngleCEnabled = true;
@@ -70,20 +86,27 @@ namespace TrigSolver.Core
             }
             else
             {
-                view.AngleA = System.Math.Round(response.Solution.AngA, precision).ToString();
-                view.AngleB = System.Math.Round(response.Solution.AngB, precision).ToString();
-                view.AngleC = System.Math.Round(response.Solution.AngC, precision).ToString();
-                view.LengthA = System.Math.Round(response.Solution.LenA, precision).ToString();
-                view.LengthB = System.Math.Round(response.Solution.LenB, precision).ToString();
-                view.LengthC = System.Math.Round(response.Solution.LenC, precision).ToString();
+                Data solution = ds.Solve();
 
-                char[] arr = response.Profile.ToCharArray();
-                view.AngleAEnabled = ('1' == arr[0]);
-                view.AngleBEnabled = ('1' == arr[1]);
-                view.AngleCEnabled = ('1' == arr[2]);
-                view.LengthAEnabled = ('1' == arr[3]);
-                view.LengthBEnabled = ('1' == arr[4]);
-                view.LengthCEnabled = ('1' == arr[5]);
+                view.SetStatusText("Solved", "");
+
+                double k;
+                if (view.Degrees) { k = 180 / System.Math.PI; } else { k = 1; }
+
+                if (ds.Profile.Substring(0, 1) == "0") { view.AngleA = System.Math.Round(solution.AngA * k, precision).ToString(); }
+                if (ds.Profile.Substring(1, 1) == "0") { view.AngleB = System.Math.Round(solution.AngB * k, precision).ToString(); }
+                if (ds.Profile.Substring(2, 1) == "0") { view.AngleC = System.Math.Round(solution.AngC * k, precision).ToString(); }
+                if (ds.Profile.Substring(3, 1) == "0") { view.LengthA = System.Math.Round(solution.LenA, precision).ToString(); }
+                if (ds.Profile.Substring(4, 1) == "0") { view.LengthB = System.Math.Round(solution.LenB, precision).ToString(); }
+                if (ds.Profile.Substring(5, 1) == "0") { view.LengthC = System.Math.Round(solution.LenC, precision).ToString(); }
+
+                // Disable calculated textboxes
+                view.AngleAEnabled = (ds.Profile.Substring(0, 1) == "1");
+                view.AngleBEnabled = (ds.Profile.Substring(1, 1) == "1");
+                view.AngleCEnabled = (ds.Profile.Substring(2, 1) == "1");
+                view.LengthAEnabled = (ds.Profile.Substring(3, 1) == "1");
+                view.LengthBEnabled = (ds.Profile.Substring(4, 1) == "1");
+                view.LengthCEnabled = (ds.Profile.Substring(5, 1) == "1");
             }
         }
 
@@ -94,51 +117,20 @@ namespace TrigSolver.Core
             Data data = new Data()
             {
                 AngA = ParseInputText(view.AngleA) * k * System.Convert.ToInt16(view.AngleAEnabled),
-                AngB = ParseInputText(view.AngleB) * k * System.Convert.ToInt16(view.AngleAEnabled),
-                AngC = ParseInputText(view.AngleC) * k * System.Convert.ToInt16(view.AngleAEnabled),
-                LenA = ParseInputText(view.LengthA) * System.Convert.ToInt16(view.AngleAEnabled),
-                LenB = ParseInputText(view.LengthB) * System.Convert.ToInt16(view.AngleAEnabled),
-                LenC = ParseInputText(view.LengthC) * System.Convert.ToInt16(view.AngleAEnabled),
+                AngB = ParseInputText(view.AngleB) * k * System.Convert.ToInt16(view.AngleBEnabled),
+                AngC = ParseInputText(view.AngleC) * k * System.Convert.ToInt16(view.AngleCEnabled),
+                LenA = ParseInputText(view.LengthA) * System.Convert.ToInt16(view.LengthAEnabled),
+                LenB = ParseInputText(view.LengthB) * System.Convert.ToInt16(view.LengthBEnabled),
+                LenC = ParseInputText(view.LengthC) * System.Convert.ToInt16(view.LengthCEnabled),
             };
             return data;
         }
-            
-        
-
-
-
-
-        private ControllerResponse Evaluate(Data data)
-        {
-            DataSet ds = new DataSet(data);
-
-            ControllerResponse response = new ControllerResponse();
-
-            if (Validation.Test(ds).Error)
-            {
-                response.Error = true;
-                response.Solution = new Data();
-                response.Text = Validation.ErrorMessage;
-
-            }
-            else
-            {
-                response.Error = false;
-                response.Solution = ds.Solve();
-                response.Text = "Solved";
-                response.Profile = ds.Profile;
-            }
-
-
-            return response;
-        }
-
-
 
         private static double ParseInputText(string str)
         {
             double ans = new double();
             double.TryParse(str, out ans);
+            if (double.IsNaN(ans)) { ans = 0; }
             if (ans < 0) { ans = 0; }
             return ans;
         }

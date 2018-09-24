@@ -30,8 +30,7 @@ namespace TrigSolver.Core
         // methods
         //
         void SetController(IController controller);
-        void SetProfile(string profile);
-        void MessageBox(string message);
+        void SetStatusText(string shortText, string longText);
 
     }
 }
