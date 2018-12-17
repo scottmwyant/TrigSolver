@@ -24,3 +24,26 @@ The MVC or MVVM pattern is loosely implemented here.  The goal is to show sepera
 ## TODO
 
 - Need to figure out how to set up testing.
+- Use the following format to create an integer representation of a specific case: `Convert.ToInt32("1000", 2);`
+- Use the following format to decode a integer to a binary string `Convert.ToString(10, 2);`
+
+
+## Flow
+
+### Program.Main()
+
+The user interacts with the view.  When the application is opened, the *Main* method on the *Program* class is called.  Within this method, a new view is instantiated.  The view is passed into the *GetController* method on the *Core.Factory*.
+
+#### How is the controller and the model related to the view?
+
+The factory is passed the view, and it in turn passes the view to the constructor for the controller.   The controller injects itself to the view.  This is implemented by having the controller call a *SetController* method on the view that is defined on the IView interface.  Then, finally, the controller is returned to the view.
+
+The key here is that the view and the controller each hold a reference to the other, but this relationship is explicitly defined using the IViwe and IController interfaces.
+
+### View.TextBox_TextChanged(object sender, EventArgs e)
+
+This is the handler for the user input event.  This handler immidiately defers control to IController.Solve().
+
+### Controller.Solve()
+
+The controller reads the data from the view then compares the data to a number of specifications.  There are a few more calls here, they are all internal to the core project.  There is a call to *Validation.Test*, which returns a *ValidationResponse* object.  The validation response object is then traversed by the controller to hand data back to the view.
