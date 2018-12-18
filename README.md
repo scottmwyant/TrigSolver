@@ -26,6 +26,7 @@ The MVC or MVVM pattern is loosely implemented here.  The goal is to show sepera
 - Need to figure out how to set up testing.
 - Use the following format to create an integer representation of a specific case: `Convert.ToInt32("1000", 2);`
 - Use the following format to decode a integer to a binary string `Convert.ToString(10, 2);`
+- Take another look at how to approach testing.
 
 
 ## Flow
