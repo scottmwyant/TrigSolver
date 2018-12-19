@@ -1,0 +1,21 @@
+Case,ID-Binary,ID-Int
+"case ""111000"": solver = new SSS0(); break;",111000,112
+"case ""001110"": solver = new SAS0(); break;",001110,26
+"case ""010101"": solver = new SAS1(); break;",010101,41
+"case ""100011"": solver = new SAS2(); break;",100011,67
+"case ""110001"": solver = new ASA0(); break;",110001,97
+"case ""011100"": solver = new ASA1(); break;",011100,56
+"case ""101010"": solver = new ASA2(); break;",101010,82
+"case ""110100"": solver = new AAS0(); break;",110100,104
+"case ""101100"": solver = new AAS1(); break;",101100,88
+"case ""110010"": solver = new AAS2(); break;",110010,98
+"case ""011010"": solver = new AAS3(); break;",011010,50
+"case ""101001"": solver = new AAS4(); break;",101001,81
+"case ""011001"": solver = new AAS5(); break;",011001,49
+"case ""100110"": solver = new SSA0(); break;",100110,74
+"case ""100101"": solver = new SSA1(); break;",100101,73
+"case ""010110"": solver = new SSA2(); break;",010110,42
+"case ""010011"": solver = new SSA3(); break;",010011,35
+"case ""001101"": solver = new SSA4(); break;",001101,25
+"case ""001011"": solver = new SSA5(); break;",001011,19
+"case ""000111"": break; // AAA 1 of 1",000111,11

@@ -35,6 +35,7 @@ namespace TrigSolver.Core.Model
 
         public string Algorithm { get; private set; }
         public string Profile { get; private set; }
+        public int ProfileId { get; private set; }
 
         private ISolver solver;
 
@@ -46,6 +47,7 @@ namespace TrigSolver.Core.Model
             CountAng = CountNonZeros(Angles.Arr);
             CountLen = CountNonZeros(Lengths.Arr);
             Profile = SetProfile(this.ArrayAll);
+            ProfileId = SetProfileId(this.Profile);
             solver = Factory.GetSolver(this.Profile);
             Algorithm = solver.GetType().Name.Substring(0,3);
         }
@@ -68,6 +70,10 @@ namespace TrigSolver.Core.Model
                 if (arr[i] != 0) { ans = ans + "1"; } else { ans = ans + "0"; }
             }
             return ans;
+        }
+        private static int SetProfileId(string profile)
+        {
+            return System.Convert.ToInt16(profile, 2);
         }
     }
 }
