@@ -23,7 +23,8 @@ interface ITrigSolver {
 
 interface ISolveResponse {
   triangle: null | Triangle
-  text: string
+  text: string,
+  calculatedValues: DataPoint[]
 }
 
 interface IValidationResponse {
@@ -83,8 +84,8 @@ export class TrigSolver implements ITrigSolver {
 
     return {
       triangle: new Triangle(data),
-      text: ''
-
+      text: '',
+      calculatedValues
     }
 
   }

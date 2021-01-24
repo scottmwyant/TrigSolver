@@ -2,9 +2,9 @@ import { DataPoint } from './DataPoint'
 
 export class Triangle {
 
-    classification1: 'acute' | 'obtuse' | 'right'
-    classification2: 'equilateral' | 'isosceles' | 'scalene'
-    points: Point[]
+    classification1: 'acute' | 'obtuse' | 'right';
+    classification2: 'equilateral' | 'isosceles' | 'scalene';
+    points: Point[];
 
     private useDegrees: boolean
     private rankedLengths: {min: number, mid: number, max: number}
@@ -60,38 +60,25 @@ export class Triangle {
 
         const ang = this.angles;
         this.rankedAngles = rank(ang);
-        
-        this.classification1 = (() => {
-
-            if (len.filter(value => value > 90).length > 0) {
-                return 'obtuse'
-            }
-            else if (len.filter(value => value == 90).length > 0) {
-                return 'right'
-            }
-            else {
-                return 'acute'
-            }
-
-        })();
-
-        this.classification2 = (() => {
-            if (len[0] == len[1] && len[0] == len[2]) {
-                return 'equilateral';
-            }
-            else if (len[0] == len[1] || len[0] == len[2] || len[1] == len[2]) {
-                return 'isosceles';
-            }
-            else {
-                return 'scalene';
-            }
-        })();
 
         this.useDegrees = (() => {
             const sumOfAngles = ang.reduce((total, current) => total + current);
             const deltaDeg = Math.abs(sumOfAngles - 180);
             const deltaRad = Math.abs(sumOfAngles - Math.PI);
             return deltaDeg < deltaRad;
+        })();
+        
+        this.classification1 = (() => {
+            const rightAngle = this.useDegrees ? 90 : Math.PI/2;
+            if (this.rankedAngles.max > rightAngle) { return 'obtuse'; }
+            else if (this.rankedAngles.max < rightAngle) { return 'acute'; }
+            else { return 'right'; }
+        })();
+
+        this.classification2 = (() => {
+            if (len[0] == len[1] && len[0] == len[2]) { return 'equilateral'; }
+            else if (len[0] == len[1] || len[0] == len[2] || len[1] == len[2]) { return 'isosceles'; }
+            else { return 'scalene'; }
         })();
 
         this.points = (() => {
@@ -113,7 +100,7 @@ export class Triangle {
                     new Point(longLeg*Math.cos(angle*Math.PI/180), longLeg*Math.sin(angle*Math.PI/180))
                 ];
             }
-            else {
+            else { // (this.classification2 == 'scalene')
                 const targetLabel = this.data.filter(item => item.feature == 'length' && item.value == this.rankedLengths.min)[0].label;
                 const angle = this.data.filter(item => item.feature == 'angle' && item.label == targetLabel)[0].value;
                 const midLeg = this.rankedLengths.mid;

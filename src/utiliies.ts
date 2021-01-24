@@ -99,9 +99,9 @@ export function profile(inputs: DataPoint[]) {
       { name: 'side-side-side', scope: [56] },
       { name: 'side-side-angle', scope: [28, 42, 49] },
       { name: 'side-angle-angle', scope: [14, 21, 35] },
-      { name: "pair-and-angle", scope: [11, 13, 19, 22, 37, 38] },
+      { name: "pair-and-side", scope: [25, 26, 41, 44, 50, 52] },
       { name: "pair-and-angle", scope: [11, 13, 19, 22, 37, 38] }
-    ];
+    ]
     const arr = data.filter(item => (item.scope.indexOf(caseId) > -1));
     return arr.length == 1 ? arr[0].name : 'no-solution';
   })();

@@ -1,6 +1,6 @@
 import { assert } from 'chai';
-
-import { TrigSolver } from '../src/TrigSolver'
+import { TrigSolver } from '../src/TrigSolver';
+import { sampleData } from './sampleData';
 
 describe('The basics of the TrigSolver library...', function () {
 
@@ -35,4 +35,25 @@ describe('The basics of the TrigSolver library...', function () {
 
 });
 
+describe('Test each algorithm..', function () {
 
+  sampleData.forEach(sample => {
+
+    describe(`${sample.testCase}`, function() {
+
+      const ts = new TrigSolver(sample.input.map(item => item.id));
+      const output = ts.solve(sample.input.map(item => item.value)).calculatedValues;
+      const precision = .01; // .00001
+
+      sample.output.forEach((item, i) => {
+        it(output[i].id, function() {
+          assert.approximately(output[i].value, item.value, precision);
+        });
+
+      });
+
+    });
+
+  });
+
+});

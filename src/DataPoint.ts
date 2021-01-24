@@ -50,7 +50,7 @@ export class DataPoint {
             this.label = arguments[0].toLowerCase();
             this.feature = arguments[1].toLowerCase();
             this.value = arguments[2];
-            this.id = (this.label + this.feature.toUpperCase());
+            this.id = (this.feature + this.label.toUpperCase());
         }
     }
 }
