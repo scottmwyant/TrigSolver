@@ -23,7 +23,6 @@ interface ITrigSolver {
 
 interface ISolveResponse {
   triangle: Triangle[]
-  text: string
   calculatedValues: DataPoint[][]
 }
 
@@ -86,7 +85,6 @@ export class TrigSolver implements ITrigSolver {
 
     return {
       triangle: calculatedValues.map(sln => new Triangle(given.concat(sln))),
-      text: '',
       calculatedValues
     };
       
