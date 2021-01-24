@@ -5,19 +5,15 @@ import { transform } from './utiliies';
 
 export interface Solution {
   name: string
-  fn: (given: DataPoint[]) => DataPoint[]
+  fn: (given: DataPoint[]) => DataPoint[][]
 }
 
 export function getSolution(profile: Profile) {
 
   const noSolution = {
     name: "no-solution",
-    fn: function (given: DataPoint[]): DataPoint[] {
-      return [
-        new DataPoint(''),
-        new DataPoint(''),
-        new DataPoint('')
-      ];
+    fn: function (given: DataPoint[]): DataPoint[][] {
+      return [];
     }
   }
 
@@ -29,11 +25,11 @@ export function getSolution(profile: Profile) {
     // Then get the last angle
     {
       "name": "side-side-side",
-      "fn": function (given: DataPoint[]): DataPoint[] {
+      "fn": function (given: DataPoint[]): DataPoint[][] {
         const out0 = trig.lawOfCosines([given[1], given[2]], given[0]);
         const out1 = trig.lawOfCosines([given[0], given[2]], given[1]);
         const out2 = trig.sumOfAngles([out0, out1]);
-        return [out0, out1, out2];
+        return [[out0, out1, out2]];
       }
     },
 
@@ -42,13 +38,13 @@ export function getSolution(profile: Profile) {
     // one of the missing angles, then sum of angles.
     {
       "name": "side-side-angle",
-      "fn": function (given: DataPoint[]): DataPoint[] {
+      "fn": function (given: DataPoint[]): DataPoint[][] {
         const lengths = transform.filterByFeature(given, 'length');
         const angle = transform.filterByFeature(given, 'angle')[0];
         const out0 = trig.lawOfCosines(lengths, angle);
         const out1 = trig.lawOfSines(transform.getPair([angle, out0]), lengths[0]);
         const out2 = trig.sumOfAngles([angle, out1]);
-        return [out0, out1, out2];
+        return [[out0, out1, out2]];
       }
     },
 
@@ -57,14 +53,14 @@ export function getSolution(profile: Profile) {
     // law of sines to get the other two sides.
     {
       "name": "side-angle-angle",
-      "fn": function (given: DataPoint[]): DataPoint[] {
+      "fn": function (given: DataPoint[]): DataPoint[][] {
         const angles = transform.filterByFeature(given, 'angle');
         const length = transform.filterByFeature(given, 'length')[0];
         const out0 = trig.sumOfAngles(angles);
         const pair = transform.getPair([length, out0]);
         const out1 = trig.lawOfSines(pair, angles[0]);
         const out2 = trig.lawOfSines(pair, angles[1]);
-        return [out0, out1, out2];
+        return [[out0, out1, out2]];
       }
     },
 
@@ -72,14 +68,14 @@ export function getSolution(profile: Profile) {
     // ** Something is wrong here **  the algorithm for this case should not be the same as the case above.
     {
       "name": "pair-and-angle",
-      "fn": function (given: DataPoint[]): DataPoint[] {
+      "fn": function (given: DataPoint[]): DataPoint[][] {
         const pair = transform.getPair(given);
         const angle = transform.getOther(given);
         const angles = transform.filterByFeature(given, 'angle');
         const out0 = trig.sumOfAngles(angles);
         const out1 = trig.lawOfSines(pair, angle);
         const out2 = trig.lawOfSines(pair, out0);
-        return [out0, out1, out2];
+        return [[out0, out1, out2]];
       }
     },
 
@@ -90,14 +86,14 @@ export function getSolution(profile: Profile) {
     // and https://socratic.org/trigonometry/triangles-and-vectors/the-ambiguous-case
     {
       "name": "pair-and-side",
-      "fn": function (given: DataPoint[]): DataPoint[] {
+      "fn": function (given: DataPoint[]): DataPoint[][] {
         const pair = transform.getPair(given);
         const length = transform.getOther(given);
         const angle = transform.filterByFeature(given, 'angle')[0];
         const out0 = trig.lawOfSines(pair, length);
         const out1 = trig.sumOfAngles([angle, out0]);
         const out2 = trig.lawOfSines(pair, out1);
-        return [out0, out1, out2];
+        return [[out0, out1, out2]];
       }
     }
 

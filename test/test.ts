@@ -46,8 +46,8 @@ describe('Test each algorithm..', function () {
       const precision = .01; // .00001
 
       sample.output.forEach((item, i) => {
-        it(output[i].id, function() {
-          assert.approximately(output[i].value, item.value, precision);
+        it(output[0][i].id, function() {
+          assert.approximately(output[0][i].value, item.value, precision);
         });
 
       });

@@ -22,9 +22,9 @@ interface ITrigSolver {
 }
 
 interface ISolveResponse {
-  triangle: null | Triangle
-  text: string,
-  calculatedValues: DataPoint[]
+  triangle: Triangle[]
+  text: string
+  calculatedValues: DataPoint[][]
 }
 
 interface IValidationResponse {
@@ -38,13 +38,13 @@ export class TrigSolver implements ITrigSolver {
   private profile: Profile
   private rules: Rule[]
   private solution: Solution
-  private inputs: DataPoint[]
+  private input: DataPoint[]
 
   get caseName() { return this.profile.caseName; }
 
   constructor(inputIds: string[]) {
-    this.inputs = inputIds.map(item => new DataPoint(item));
-    this.profile = util.profile(this.inputs)
+    this.input = inputIds.map(item => new DataPoint(item));
+    this.profile = util.profile(this.input)
     this.rules = getRules(this.profile);
     this.solution = getSolution(this.profile);
     this.useDegrees = true;
@@ -62,12 +62,12 @@ export class TrigSolver implements ITrigSolver {
   solve(input: { id: string, value: number }[]): ISolveResponse
   solve(input: any): ISolveResponse {
 
-    const given = (() => {
+    const given: DataPoint[] = (() => {
       if (typeof input[0] == 'number') {
         input.forEach((item: number, i: number) => {
-          this.inputs[i].value = item
+          this.input[i].value = input[i];
         });
-        return this.inputs
+        return this.input
       }
       else if (typeof input[0] == 'object') {
         return input.map((item: { id: string, value: number }) => new DataPoint(item));
@@ -78,15 +78,18 @@ export class TrigSolver implements ITrigSolver {
 
     const calculatedValues = this.solution.fn(given);
 
-    if (this.useDegrees) { util.convert.toDegrees(calculatedValues); }
-
-    const data = given.concat(calculatedValues);
+    if (this.useDegrees) {
+      calculatedValues.forEach(sln => {
+        util.convert.toDegrees(sln);
+      });
+    }
 
     return {
-      triangle: new Triangle(data),
+      triangle: calculatedValues.map(sln => new Triangle(given.concat(sln))),
       text: '',
       calculatedValues
-    }
+    };
+      
 
   }
 
