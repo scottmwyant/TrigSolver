@@ -1,5 +1,7 @@
 import { DataPoint } from './DataPoint'
 
+export type CaseName = "side-side-side" | "side-side-angle" | "side-angle-angle" | "pair-and-angle" | "pair-and-side" | "no-solution";
+
 export function parseInputId(inputId: string) {
   return {
     feature: inputId.substring(0, inputId.length - 1).toLowerCase(),
@@ -94,15 +96,18 @@ export function profile(inputs: DataPoint[]) {
 
   const caseId = parseInt(binary.join(''), 2);
 
-  const caseName = (function () {
-    const data = [
+  const caseName = (function (): CaseName {
+    const data: {name: CaseName, scope: number[]}[] = [
       { name: 'side-side-side', scope: [56] },
       { name: 'side-side-angle', scope: [28, 42, 49] },
       { name: 'side-angle-angle', scope: [14, 21, 35] },
       { name: "pair-and-side", scope: [25, 26, 41, 44, 50, 52] },
       { name: "pair-and-angle", scope: [11, 13, 19, 22, 37, 38] }
-    ]
+    ];
     
+    const arr = data.filter(item => (item.scope.indexOf(caseId) > -1));
+    return arr.length == 1 ? arr[0].name : 'no-solution';
+
     /*
     
       This array is included here in the source code and intentionally
@@ -133,8 +138,6 @@ export function profile(inputs: DataPoint[]) {
     //   { "binary": "000111", "id": 7, "algorithm": "no-solution" }
     // ];
 
-    const arr = data.filter(item => (item.scope.indexOf(caseId) > -1));
-    return arr.length == 1 ? arr[0].name : 'no-solution';
   })();
 
   const count = (function () {

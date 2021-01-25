@@ -5,6 +5,9 @@
 //     id?: string
 // }
 
+export type Given = [DataPoint, DataPoint, DataPoint];
+export type Calculated = [DataPoint, DataPoint, DataPoint];
+
 export class DataPoint {
 
     id: string

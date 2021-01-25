@@ -1,12 +1,12 @@
-import { DataPoint } from './DataPoint';
+import { DataPoint, Given } from './DataPoint';
 import { Rule, getRules, RuleResult } from './Rule';
-import { getSolution, Solution } from './Solutions';
+import { getSolution, ISolution } from './Solutions';
 import { Triangle } from './Triangle';
 import * as util from './utiliies';
 
 export interface Profile {
   caseId: number,
-  caseName: string,
+  caseName: util.CaseName
   count: {
     lengths: number,
     angles: number,
@@ -23,7 +23,7 @@ interface ITrigSolver {
 
 interface ISolveResponse {
   triangle: Triangle[]
-  calculatedValues: DataPoint[][]
+  calculatedValues: DataPoint[] | DataPoint[][]
 }
 
 interface IValidationResponse {
@@ -36,7 +36,7 @@ export class TrigSolver implements ITrigSolver {
   public useDegrees: boolean
   private profile: Profile
   private rules: Rule[]
-  private solution: Solution
+  private solution: ISolution
   private input: DataPoint[]
 
   get caseName() { return this.profile.caseName; }
@@ -49,7 +49,7 @@ export class TrigSolver implements ITrigSolver {
     this.useDegrees = true;
   }
 
-  validate(given: DataPoint[]): IValidationResponse {
+  validate(given: Given): IValidationResponse {
     const results = this.rules.map(rule => rule.fn(given));
     return {
       detail: results,
@@ -61,7 +61,7 @@ export class TrigSolver implements ITrigSolver {
   solve(input: { id: string, value: number }[]): ISolveResponse
   solve(input: any): ISolveResponse {
 
-    const given: DataPoint[] = (() => {
+    const given: Given = (() => {
       if (typeof input[0] == 'number') {
         input.forEach((item: number, i: number) => {
           this.input[i].value = input[i];
@@ -75,11 +75,11 @@ export class TrigSolver implements ITrigSolver {
 
     if (this.useDegrees) { util.convert.toRadians(given); }
 
-    const calculatedValues = this.solution.fn(given);
+    const calculatedValues = this.solution(given);
 
     if (this.useDegrees) {
-      calculatedValues.forEach(sln => {
-        util.convert.toDegrees(sln);
+      calculatedValues.forEach(item => {
+        util.convert.toDegrees(item);
       });
     }
 
