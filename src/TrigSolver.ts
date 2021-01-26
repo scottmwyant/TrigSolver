@@ -77,14 +77,16 @@ export class TrigSolver implements ITrigSolver {
 
     const calculatedValues = this.solution(given);
 
-    if (this.useDegrees) {
-      calculatedValues.forEach(item => {
-        util.convert.toDegrees(item);
+    const rtn = calculatedValues.map(sln => new Triangle(given.concat(sln)));
+
+    if (this.useDegrees) { 
+      rtn.forEach(item => {
+        item.convert.toDegrees();
       });
     }
 
     return {
-      triangle: calculatedValues.map(sln => new Triangle(given.concat(sln))),
+      triangle: rtn,
       calculatedValues
     };
       

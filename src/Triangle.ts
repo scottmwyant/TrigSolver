@@ -1,128 +1,130 @@
 import { DataPoint } from './DataPoint'
 
+type Points = [Point, Point, Point]
+type AngleClass = 'acute' | 'obtuse' | 'right'
+type LengthClass = 'equilateral' | 'isosceles' | 'scalene'
+type DataDetail = {
+    a: number, b: number, c: number,
+    min: number, mid: number, max: number
+}
+
 export class Triangle {
 
-    classification1: 'acute' | 'obtuse' | 'right';
-    classification2: 'equilateral' | 'isosceles' | 'scalene';
-    points: Point[];
-
-    private useDegrees: boolean
-    private rankedLengths: {min: number, mid: number, max: number}
-    private rankedAngles: {min: number, mid: number, max: number}
-
-    private featureAsKey: {
-        length: { a: number, b: number, c: number },
-        angle: { a: number, b: number, c: number }
+    public readonly class: {
+        readonly byAngles: AngleClass
+        readonly byLengths: LengthClass
     }
 
+    get angles() { return this._angles; }
 
-    // private labelAsKey: {
-    //     a: {length: number, angle: number},
-    //     b: {length: number, angle: number},
-    //     c: {length: number, angle: number}
-    // }
+    readonly lengths: DataDetail;
+    readonly points: Points;
+    readonly degrees: boolean;
+    readonly convert: {
+        toDegrees: () => void
+        toRadians: () => void
+    }
+
+    private _angles: DataDetail;
 
     constructor(private data: DataPoint[]) {
 
-        // function dataByLabel() {
-        //     const obj: any = {};
-        //     data.forEach(item =>{
-        //         obj[item.label][item.feature] = item.value;
-        //     });
-        //     return obj;
-        // }
-
-        function dataByFeature() {
-            const obj: any = {};
-            data.forEach(item => {
-                if (obj[item.feature] == undefined) {
-                    obj[item.feature] = {};
-                }
-                obj[item.feature][item.label] = item.value;
-            });
-            return obj;
-        }
-
-        this.featureAsKey = dataByFeature();
-        // this.labelAsKey = dataByLabel();
-
-        function rank(arr: number[]){
-            const obj = {};
+        const organize = (() => {
+            function fn(feature: string) {
+                const obj = {} as DataDetail;
+                const featureData = data.filter(item => item.feature == feature);
+                obj.a = featureData.filter(item => item.label == 'a')[0].value;
+                obj.b = featureData.filter(item => item.label == 'b')[0].value;
+                obj.c = featureData.filter(item => item.label == 'c')[0].value;
+                obj.min = Math.min(...featureData.map(item => item.value));
+                obj.max = Math.max(...featureData.map(item => item.value));
+                obj.mid = featureData.map(item => item.value).reduce((sum, current) => sum + current) - obj.min - obj.max;
+                return obj
+            }
             return {
-                min: Math.min(...arr),
-                mid: arr.reduce((sum, val) => sum + val) - Math.min(...arr) - Math.max(...arr),
-                max: Math.max(...arr)
-            };
-        }
+                angles: function () { return fn('angle') },
+                lengths: function () { return fn('length') }
+            }
+        })();
 
-        const len = this.lengths;
-        this.rankedLengths = rank(len);
+        this._angles = organize.angles();
+        this.lengths = organize.lengths();
 
-        const ang = this.angles;
-        this.rankedAngles = rank(ang);
-
-        this.useDegrees = (() => {
-            const sumOfAngles = ang.reduce((total, current) => total + current);
+        this.degrees = (() => {
+            const ang = this.angles;
+            const sumOfAngles = ang.a + ang.b + ang.c;
             const deltaDeg = Math.abs(sumOfAngles - 180);
             const deltaRad = Math.abs(sumOfAngles - Math.PI);
             return deltaDeg < deltaRad;
         })();
-        
-        this.classification1 = (() => {
-            const rightAngle = this.useDegrees ? 90 : Math.PI/2;
-            if (this.rankedAngles.max > rightAngle) { return 'obtuse'; }
-            else if (this.rankedAngles.max < rightAngle) { return 'acute'; }
-            else { return 'right'; }
+
+        this.class = (() => {
+            const byAngles: AngleClass = (() => {
+                const rightAngle = this.degrees ? 90 : Math.PI / 2;
+                if (this.angles.max > rightAngle) { return 'obtuse'; }
+                else if (this.angles.max < rightAngle) { return 'acute'; }
+                else { return 'right'; }
+            })();
+            const byLengths: LengthClass = (() => {
+                const len = this.lengths
+                if (len.a == len.b && len.a == len.c) { return 'equilateral'; }
+                else if (len.a == len.b || len.a == len.c || len.b == len.c) { return 'isosceles'; }
+                else { return 'scalene'; }
+            })();
+            return { byAngles, byLengths };
         })();
 
-        this.classification2 = (() => {
-            if (len[0] == len[1] && len[0] == len[2]) { return 'equilateral'; }
-            else if (len[0] == len[1] || len[0] == len[2] || len[1] == len[2]) { return 'isosceles'; }
-            else { return 'scalene'; }
-        })();
 
-        this.points = (() => {
-            if (this.classification2 == 'equilateral') {
-                const len = this.lengths[0];
+        this.points = ((): Points => {
+            if (this.class.byLengths == 'equilateral') {
+                const len = this.lengths.a;
                 return [
                     new Point(0, 0),
                     new Point(len, 0),
                     new Point(len / 2, len * Math.cos(30 * Math.PI / 180))
                 ];
             }
-            else if (this.classification2 == 'isosceles') {
-                const targetLabel = this.data.filter(item => item.feature == 'length' && item.value == this.rankedLengths.min)[0].label;
+            else if (this.class.byLengths == 'isosceles') {
+                const targetLabel = this.data.filter(item => item.feature == 'length' && item.value == this.lengths.min)[0].label;
                 const angle = this.data.filter(item => item.label == targetLabel && item.feature == 'angle')[0].value;
-                const longLeg = this.rankedLengths.max;
+                const longLeg = this.lengths.max;
                 return [
                     new Point(0, 0),
                     new Point(longLeg, 0),
-                    new Point(longLeg*Math.cos(angle*Math.PI/180), longLeg*Math.sin(angle*Math.PI/180))
+                    new Point(longLeg * Math.cos(angle * Math.PI / 180), longLeg * Math.sin(angle * Math.PI / 180))
                 ];
             }
-            else { // (this.classification2 == 'scalene')
-                const targetLabel = this.data.filter(item => item.feature == 'length' && item.value == this.rankedLengths.min)[0].label;
+            else { // (this.class.byLengths == 'scalene')
+                const targetLabel = this.data.filter(item => item.feature == 'length' && item.value == this.lengths.min)[0].label;
                 const angle = this.data.filter(item => item.feature == 'angle' && item.label == targetLabel)[0].value;
-                const midLeg = this.rankedLengths.mid;
+                const midLeg = this.lengths.mid;
                 return [
                     new Point(0, 0),
-                    new Point(this.rankedLengths.max, 0),
-                    new Point(midLeg * Math.cos(angle*Math.PI/180), midLeg*Math.sin(angle*Math.PI/180))
+                    new Point(this.lengths.max, 0),
+                    new Point(midLeg * Math.cos(angle * Math.PI / 180), midLeg * Math.sin(angle * Math.PI / 180))
                 ];
+            }
+        })();
+
+        this.convert = (() => {
+            function multiplyAngles(angles: DataDetail, scaleFactor: number) {
+                return {
+                    a: angles.a * scaleFactor,
+                    b: angles.b * scaleFactor,
+                    c: angles.c * scaleFactor,
+                    min: angles.min * scaleFactor,
+                    mid: angles.mid * scaleFactor,
+                    max: angles.max * scaleFactor
+                };
+            }
+            return {
+                toDegrees: () => { this._angles = multiplyAngles(this.angles, 180 / Math.PI); },
+                toRadians: () => { this._angles = multiplyAngles(this.angles, Math.PI / 180) }
             }
         })();
 
     }
 
-    get lengths() {
-        const obj = this.featureAsKey.length;
-        return [obj.a, obj.b, obj.c];
-    }
-
-    get angles() {
-        const obj = this.featureAsKey.angle;
-        return [obj.a, obj.b, obj.c];
-    }
 
 }
 
