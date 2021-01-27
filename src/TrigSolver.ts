@@ -15,15 +15,10 @@ export interface Profile {
 }
 
 interface ITrigSolver {
-  useDegrees: boolean
+  useDegrees: (bool: boolean) => void
   validate(given: DataPoint[]): IValidationResponse
-  solve(input: number[]): ISolveResponse
-  solve(input: { id: string, value: number }[]): ISolveResponse
-}
-
-interface ISolveResponse {
-  triangle: Triangle[]
-  calculatedValues: DataPoint[] | DataPoint[][]
+  solve(input: number[]): Triangle[]
+  solve(input: { id: string, value: number }[]): Triangle[]
 }
 
 interface IValidationResponse {
@@ -33,7 +28,7 @@ interface IValidationResponse {
 
 export class TrigSolver implements ITrigSolver {
 
-  public useDegrees: boolean
+  private degrees: boolean
   private profile: Profile
   private rules: Rule[]
   private solution: ISolution
@@ -46,7 +41,7 @@ export class TrigSolver implements ITrigSolver {
     this.profile = util.profile(this.input)
     this.rules = getRules(this.profile);
     this.solution = getSolution(this.profile);
-    this.useDegrees = true;
+    this.degrees = true;
   }
 
   validate(given: Given): IValidationResponse {
@@ -57,9 +52,9 @@ export class TrigSolver implements ITrigSolver {
     }
   }
 
-  solve(input: number[]): ISolveResponse
-  solve(input: { id: string, value: number }[]): ISolveResponse
-  solve(input: any): ISolveResponse {
+  solve(input: number[]): Triangle[]
+  solve(input: { id: string, value: number }[]): Triangle[]
+  solve(input: any): Triangle[] {
 
     const given: Given = (() => {
       if (typeof input[0] == 'number') {
@@ -73,24 +68,22 @@ export class TrigSolver implements ITrigSolver {
       }
     })();
 
-    if (this.useDegrees) { util.convert.toRadians(given); }
+    if (this.degrees) { util.convert.toRadians(given); }
 
     const calculatedValues = this.solution(given);
 
     const rtn = calculatedValues.map(sln => new Triangle(given.concat(sln)));
 
-    if (this.useDegrees) { 
-      rtn.forEach(item => {
-        item.convert.toDegrees();
-      });
+    if (this.degrees) {
+      rtn.forEach(item => { item.toDegrees(); });
     }
 
-    return {
-      triangle: rtn,
-      calculatedValues
-    };
-      
+    return rtn;
 
+  }
+
+  useDegrees(bool: boolean){
+    this.degrees = bool;
   }
 
 }

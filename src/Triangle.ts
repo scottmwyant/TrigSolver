@@ -15,17 +15,13 @@ export class Triangle {
         readonly byLengths: LengthClass
     }
 
-    get angles() { return this._angles; }
+    get angle() { return this._angle; }
 
-    readonly lengths: DataDetail;
+    readonly length: DataDetail;
     readonly points: Points;
     readonly degrees: boolean;
-    readonly convert: {
-        toDegrees: () => void
-        toRadians: () => void
-    }
 
-    private _angles: DataDetail;
+    private _angle: DataDetail;
 
     constructor(private data: DataPoint[]) {
 
@@ -47,11 +43,11 @@ export class Triangle {
             }
         })();
 
-        this._angles = organize.angles();
-        this.lengths = organize.lengths();
+        this._angle = organize.angles();
+        this.length = organize.lengths();
 
         this.degrees = (() => {
-            const ang = this.angles;
+            const ang = this.angle;
             const sumOfAngles = ang.a + ang.b + ang.c;
             const deltaDeg = Math.abs(sumOfAngles - 180);
             const deltaRad = Math.abs(sumOfAngles - Math.PI);
@@ -61,12 +57,12 @@ export class Triangle {
         this.class = (() => {
             const byAngles: AngleClass = (() => {
                 const rightAngle = this.degrees ? 90 : Math.PI / 2;
-                if (this.angles.max > rightAngle) { return 'obtuse'; }
-                else if (this.angles.max < rightAngle) { return 'acute'; }
+                if (this.angle.max > rightAngle) { return 'obtuse'; }
+                else if (this.angle.max < rightAngle) { return 'acute'; }
                 else { return 'right'; }
             })();
             const byLengths: LengthClass = (() => {
-                const len = this.lengths
+                const len = this.length
                 if (len.a == len.b && len.a == len.c) { return 'equilateral'; }
                 else if (len.a == len.b || len.a == len.c || len.b == len.c) { return 'isosceles'; }
                 else { return 'scalene'; }
@@ -77,7 +73,7 @@ export class Triangle {
 
         this.points = ((): Points => {
             if (this.class.byLengths == 'equilateral') {
-                const len = this.lengths.a;
+                const len = this.length.a;
                 return [
                     new Point(0, 0),
                     new Point(len, 0),
@@ -85,9 +81,9 @@ export class Triangle {
                 ];
             }
             else if (this.class.byLengths == 'isosceles') {
-                const targetLabel = this.data.filter(item => item.feature == 'length' && item.value == this.lengths.min)[0].label;
+                const targetLabel = this.data.filter(item => item.feature == 'length' && item.value == this.length.min)[0].label;
                 const angle = this.data.filter(item => item.label == targetLabel && item.feature == 'angle')[0].value;
-                const longLeg = this.lengths.max;
+                const longLeg = this.length.max;
                 return [
                     new Point(0, 0),
                     new Point(longLeg, 0),
@@ -95,35 +91,34 @@ export class Triangle {
                 ];
             }
             else { // (this.class.byLengths == 'scalene')
-                const targetLabel = this.data.filter(item => item.feature == 'length' && item.value == this.lengths.min)[0].label;
+                const targetLabel = this.data.filter(item => item.feature == 'length' && item.value == this.length.min)[0].label;
                 const angle = this.data.filter(item => item.feature == 'angle' && item.label == targetLabel)[0].value;
-                const midLeg = this.lengths.mid;
+                const midLeg = this.length.mid;
                 return [
                     new Point(0, 0),
-                    new Point(this.lengths.max, 0),
+                    new Point(this.length.max, 0),
                     new Point(midLeg * Math.cos(angle * Math.PI / 180), midLeg * Math.sin(angle * Math.PI / 180))
                 ];
             }
         })();
 
-        this.convert = (() => {
-            function multiplyAngles(angles: DataDetail, scaleFactor: number) {
-                return {
-                    a: angles.a * scaleFactor,
-                    b: angles.b * scaleFactor,
-                    c: angles.c * scaleFactor,
-                    min: angles.min * scaleFactor,
-                    mid: angles.mid * scaleFactor,
-                    max: angles.max * scaleFactor
-                };
-            }
-            return {
-                toDegrees: () => { this._angles = multiplyAngles(this.angles, 180 / Math.PI); },
-                toRadians: () => { this._angles = multiplyAngles(this.angles, Math.PI / 180) }
-            }
-        })();
 
     }
+
+    private multiplyAngles(scaleFactor: number){
+        return {
+            a: this.angle.a * scaleFactor,
+            b: this.angle.b * scaleFactor,
+            c: this.angle.c * scaleFactor,
+            min: this.angle.min * scaleFactor,
+            mid: this.angle.mid * scaleFactor,
+            max: this.angle.max * scaleFactor
+        };
+    }
+    
+    toDegrees(){ this._angle = this.multiplyAngles(180 / Math.PI); }
+
+    toRadians(){ this._angle = this.multiplyAngles(Math.PI / 180) }
 
 
 }
