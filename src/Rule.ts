@@ -1,7 +1,7 @@
 import { DataPoint } from './DataPoint';
 import { Profile } from './TrigSolver';
 import { trig } from './trig';
-import { transform } from './utiliies';
+import { transform } from './utilities';
 
 // export class Rule {
 

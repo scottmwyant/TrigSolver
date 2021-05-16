@@ -1,7 +1,7 @@
 import { Calculated, DataPoint, Given } from './DataPoint';
 import { trig } from './trig';
 import { Profile } from './TrigSolver';
-import { transform } from './utiliies';
+import { transform } from './utilities';
 
 export interface ISolution {
   (given: Given): Calculated[]

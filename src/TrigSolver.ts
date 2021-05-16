@@ -2,7 +2,7 @@ import { DataPoint, Given } from './DataPoint';
 import { Rule, getRules, RuleResult } from './Rule';
 import { getSolution, ISolution } from './Solutions';
 import { Triangle } from './Triangle';
-import * as util from './utiliies';
+import * as util from './utilities';
 
 export interface Profile {
   caseId: number,

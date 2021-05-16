@@ -1,5 +1,5 @@
 import { DataPoint } from './DataPoint'
-import * as util from './utiliies' 
+import * as util from './utilities' 
 
 export const trig = (function () {
 
