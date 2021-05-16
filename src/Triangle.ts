@@ -54,21 +54,23 @@ export class Triangle {
             return deltaDeg < deltaRad;
         })();
 
-        this.class = (() => {
-            const byAngles: AngleClass = (() => {
+        this.class = (() => ({
+
+            byAngles: ((): AngleClass => {
                 const rightAngle = this.degrees ? 90 : Math.PI / 2;
                 if (this.angle.max > rightAngle) { return 'obtuse'; }
                 else if (this.angle.max < rightAngle) { return 'acute'; }
                 else { return 'right'; }
-            })();
-            const byLengths: LengthClass = (() => {
+            })(),
+
+            byLengths: ((): LengthClass => {
                 const len = this.length
                 if (len.a == len.b && len.a == len.c) { return 'equilateral'; }
                 else if (len.a == len.b || len.a == len.c || len.b == len.c) { return 'isosceles'; }
                 else { return 'scalene'; }
-            })();
-            return { byAngles, byLengths };
-        })();
+            })()
+
+        }))();
 
 
         this.points = ((): Points => {
