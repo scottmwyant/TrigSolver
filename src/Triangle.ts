@@ -10,7 +10,7 @@ type DataDetail = {
 
 export class Triangle {
 
-    public readonly class: {
+    public readonly classification: {
         readonly byAngles: AngleClass
         readonly byLengths: LengthClass
     }
@@ -54,7 +54,7 @@ export class Triangle {
             return deltaDeg < deltaRad;
         })();
 
-        this.class = (() => ({
+        this.classification = (() => ({
 
             byAngles: ((): AngleClass => {
                 const rightAngle = this.degrees ? 90 : Math.PI / 2;
@@ -74,7 +74,7 @@ export class Triangle {
 
 
         this.points = ((): Points => {
-            if (this.class.byLengths == 'equilateral') {
+            if (this.classification.byLengths == 'equilateral') {
                 const len = this.length.a;
                 return [
                     new Point(0, 0),
@@ -82,7 +82,7 @@ export class Triangle {
                     new Point(len / 2, len * Math.cos(30 * Math.PI / 180))
                 ];
             }
-            else if (this.class.byLengths == 'isosceles') {
+            else if (this.classification.byLengths == 'isosceles') {
                 const targetLabel = this.data.filter(item => item.feature == 'length' && item.value == this.length.min)[0].label;
                 const angle = this.data.filter(item => item.label == targetLabel && item.feature == 'angle')[0].value;
                 const longLeg = this.length.max;
